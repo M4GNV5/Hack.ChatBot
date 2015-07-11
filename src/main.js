@@ -44,6 +44,7 @@ fs.readdir("./src/commands", function(err, files)
 
 	ws.on("open", function()
 	{
+		console.log("connected");
 		var joinData = {cmd: "join", nick: config.nick, channel: config.channel};
 		ws.send(JSON.stringify(joinData));
 	});
@@ -65,7 +66,7 @@ fs.readdir("./src/commands", function(err, files)
 				var cmd = msg.substr(1).split(" ")[0];
 				var args = msg.substr(2 + cmd.length).split(" ");
 				
-				if(typeof commands[cmd] == 'function')
+				if(typeof commands[cmd] == 'function' && commands.hasOwnProperty(cmd))
 					commands[cmd](bot, _data.nick, args);
 				else
 					bot.send("Unknown Command: " + cmd);

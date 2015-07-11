@@ -1,6 +1,6 @@
 module.exports =
 {
-	nick: "Hack.ChatBot",
+	nick: "HackChatBot",
 	channel: "programming",
-	url: "ws://hack.chat:6060"
+	url: "wss://hack.chat/chat-ws:22"
 };

@@ -29,6 +29,7 @@ var auth = function(bot, sender, args)
 				bot.permLevel[sender] = user.level;
 
 				bot.send("@" + sender + " successfully authed as " + user.nick);
+				delete awaitingAuths[sender];
 				return;
 			}
 		}
