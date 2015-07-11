@@ -1,6 +1,6 @@
-var joke = function(send, args)
+var joke = function(bot, sender, args)
 {
-	send('A robot walks into a bar, orders a drink, and lays down some cash.\n'+
+	bot.send('A robot walks into a bar, orders a drink, and lays down some cash.\n'+
 		'Bartender says, "Hey, we don\'t serve robots."\n'+
 		'And the robot says, "Oh, but someday you will.');
 }

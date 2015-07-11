@@ -1,9 +1,7 @@
-var help = function(send, args)
+var help = function(bot, sender, args)
 {
-	send("Chat.hack bot by M4GNV5. Commands:\n" +
-		"!g, !google - returns first 3 google results\n" +
-		"!time <timezone> - gives to current time in specified timezone\n" + 
-		"!h, !help - show this help");
+	var cmds = Object.keys(bot.commands).join(", !");
+	bot.send("$\\Large Hack.Chat$ $\\Large bot$ $\\Large by$ $\\Large M4GNV5.$\nCommands: !" + cmds);
 }
 
 module.exports =

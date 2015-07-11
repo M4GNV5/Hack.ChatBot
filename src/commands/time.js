@@ -1,31 +1,22 @@
 var timeZones = require("./timezones.json");
-var sortedZones = {};
 
-for(var i = 0; i < timeZones.length; i++)
-{
-	var zone = timeZones[i];
-
-	if(typeof sortedZones[zone.abbr] == 'undefined')
-		sortedZones[zone.abbr] = zone;
-}
-
-var time = function(send, args)
+var time = function(bot, sender, args)
 {
 	console.log(args[0]);
-	if(typeof sortedZones[args[0]] != 'undefined')
+	if(typeof timeZones[args[0]] != 'undefined')
 	{
-		var zone = sortedZones[args[0]];
-		var diff = zone.offset * 60 * 60 * 1000;
+		var zone = timeZones[args[0]];
+		var diff = zone[1] * 60 * 60 * 1000;
 		var current = new Date();
 		var offset = current.getTimezoneOffset() * 60 * 1000;
 
 		var there = new Date(current.getTime() + offset + diff);
 
-		send(there.toLocaleTimeString() + " - " + zone.value);
+		bot.send(there.toLocaleTimeString() + " - " + zone[0]);
 	}
 	else
 	{
-		send("Unknown time zone");
+		bot.send("Unknown time zone");
 	}
 }
 

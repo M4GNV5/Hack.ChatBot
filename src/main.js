@@ -4,13 +4,12 @@ var path = require("path");
 var WebSocket = require("ws");
 var config = require("./config.js");
 
-var commands = {};
-
 fs.readdir("./src/commands", function(err, files)
 {
 	if(err)
 		throw err;
 
+	var commands = {};
 	for(var i = 0; i < files.length; i++)
 	{
 		if(path.extname(files[i]) == ".js")
@@ -30,13 +29,18 @@ fs.readdir("./src/commands", function(err, files)
 		}
 	}
 
-	var ws = new WebSocket(config.uri);
+	var ws = new WebSocket(config.url);
 
-	var sendChat = function(text)
+	var bot = {};
+	bot.commands = commands;
+	bot.send = function(text)
 	{
 		var msgData = JSON.stringify({cmd: "chat", text: text});
 		ws.send(msgData);
 	};
+	bot.socket = ws;
+	bot.bans = [];
+	bot.permLevel = {};
 
 	ws.on("open", function()
 	{
@@ -52,6 +56,9 @@ fs.readdir("./src/commands", function(err, files)
 		{
 			console.log(_data.nick + ": " + _data.text);
 
+			if(bot.bans.indexOf(_data.nick) !== -1)
+				return;
+
 			var msg = _data.text;
 			if(msg[0] == "!")
 			{
@@ -59,9 +66,9 @@ fs.readdir("./src/commands", function(err, files)
 				var args = msg.substr(2 + cmd.length).split(" ");
 				
 				if(typeof commands[cmd] == 'function')
-					commands[cmd](sendChat, args);
+					commands[cmd](bot, _data.nick, args);
 				else
-					sendChat("Unknown Command: " + cmd);
+					bot.send("Unknown Command: " + cmd);
 			}
 		}
 	});

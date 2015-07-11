@@ -1,7 +1,7 @@
 var google = require("google");
 google.resultsPerPage = 3;
 
-var googleCallback = function(send, args)
+var googleCallback = function(bot, sender, args)
 {
 	var search = args.join(" ");
 
@@ -9,16 +9,16 @@ var googleCallback = function(send, args)
 	{
 		if(err)
 		{
-			send("Error processing google search: " + err);
+			bot.send("Error processing google search: " + err);
 			return;
 		}
 
 		if(links.length == 0)
-			send("No results found!");
+			bot.send("No results found!");
 
 		for(var i = 0; i < links.length; i++)
 		{
-			send(links[i].title + " - " + links[i].href);
+			bot.send(links[i].title + " - " + links[i].href);
 		}
 	});
 };
