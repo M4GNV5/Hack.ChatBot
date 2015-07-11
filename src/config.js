@@ -1,6 +1,0 @@
-module.exports =
-{
-	nick: "HackChatBot",
-	channel: "programming",
-	url: "wss://hack.chat/chat-ws:22"
-};

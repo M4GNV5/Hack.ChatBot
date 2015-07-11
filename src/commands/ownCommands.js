@@ -1,3 +1,20 @@
+var fs = require("fs");
+var cmds = require("./ownCommands.json");
+var _cmds = {};
+
+var createOwnCmdFunc = function(output)
+{
+	return function(bot, sender, args)
+	{
+		bot.send(output);
+	};
+};
+
+for(var key in cmds)
+{
+	_cmds[key] = createOwnCmdFunc(cmds[key]);
+}
+
 var addOwnCmd = function(bot, sender, args)
 {
 	if(typeof bot.permLevel[sender] == 'undefined' || bot.permLevel[sender] < 3)
@@ -15,14 +32,15 @@ var addOwnCmd = function(bot, sender, args)
 		var name = args[0];
 		var output = args.slice(1).join(" ");
 
-		bot.commands[name] = function(_bot, _sender, _args)
-		{
-			_bot.send(output);
-		};
+		bot.commands[name] = createOwnCmdFunc(output);
+		cmds[name] = output;
 
 		bot.send("@" + sender + " added command " + name);
+
+		saveOwnCmds();
 	}
 };
+
 var removeOwnCmd = function(bot, sender, args)
 {
 	if(typeof bot.permLevel[sender] == 'undefined' || bot.permLevel[sender] < 3)
@@ -38,8 +56,26 @@ var removeOwnCmd = function(bot, sender, args)
 	else
 	{
 		delete bot.commands[args[0]];
+		delete cmds[args[0]];
 		bot.send("@" + sender + " removed command " + args[0]);
+
+		saveOwnCmds();
 	}
 };
 
-module.exports = { add: addOwnCmd, remove: removeOwnCmd};
+var saveOwnCmds = function()
+{
+	fs.writeFile("./src/commands/ownCommands.json", JSON.stringify(cmds), function(err)
+	{
+		if(err)
+			throw err;
+	});
+};
+
+var exports = {add: addOwnCmd, remove: removeOwnCmd};
+for(var key in _cmds)
+{
+	exports[key] = _cmds[key];
+}
+
+module.exports = exports;

@@ -2,7 +2,7 @@ var fs = require("fs");
 var path = require("path");
 
 var WebSocket = require("ws");
-var config = require("./config.js");
+var config = require("./config.json");
 
 fs.readdir("./src/commands", function(err, files)
 {
