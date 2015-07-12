@@ -3,7 +3,7 @@ var knowUsers = require("./users.json");
 
 var awaitingAuths = {};
 
-var auth = function(bot, sender, args)
+var login = function(bot, sender, args)
 {
 	if(typeof awaitingAuths[sender] == 'undefined')
 	{
@@ -38,4 +38,4 @@ var auth = function(bot, sender, args)
 	}
 };
 
-module.exports = { auth: auth };
+module.exports = { login: login };
