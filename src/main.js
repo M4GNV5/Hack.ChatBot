@@ -23,7 +23,7 @@ fs.readdir("./src/commands", function(err, files)
 
 			if(typeof cmds.init == 'function')
 			{
-				cmds.init(bot, config);
+				cmds.init(bot);
 				delete cmds.init;
 			}
 
@@ -39,7 +39,7 @@ fs.readdir("./src/commands", function(err, files)
 
 	bot.on("chat", function(data)
 	{
-		console.log(bot.channel + "|" + data.nick + ": " + data.text);
+		console.log(bot.channel + " | " + data.nick + ": " + data.text);
 
 		if(bot.bans.indexOf(data.nick) !== -1)
 			return;
