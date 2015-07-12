@@ -13,6 +13,7 @@ fs.readdir("./src/commands", function(err, files)
 
 	bot.commands = {};
 	bot.init = [];
+
 	for(var i = 0; i < files.length; i++)
 	{
 		if(path.extname(files[i]) == ".js")
@@ -39,11 +40,11 @@ fs.readdir("./src/commands", function(err, files)
 		}
 	}
 
-	bot.on("chat", function(data)
+	bot.parseCmd = function(data)
 	{
-		console.log(bot.channel + " | " + data.nick + ": " + data.text);
+		console.log(this.channel + " | " + data.nick + ": " + data.text);
 
-		if(bot.bans.indexOf(data.nick) !== -1)
+		if(this.bans.indexOf(data.nick) !== -1)
 			return;
 
 		var msg = data.text;
@@ -52,11 +53,16 @@ fs.readdir("./src/commands", function(err, files)
 			var cmd = msg.substr(1).split(" ")[0];
 			var args = msg.substr(2 + cmd.length).split(" ");
 			
-			if(typeof bot.commands[cmd] == 'function' && bot.commands.hasOwnProperty(cmd))
-				bot.commands[cmd](bot, data.nick, args);
+			if(typeof this.commands[cmd] == 'function' && this.commands.hasOwnProperty(cmd))
+				this.commands[cmd](this, data.nick, args);
 			else
-				bot.send("Unknown Command: " + cmd);
+				this.send("Unknown Command: " + cmd);
 		}
+	}
+
+	bot.on("chat", function(data)
+	{
+		bot.parseCmd(data);
 	});
 
 	bot.on("info", function(data)
