@@ -6,14 +6,13 @@ Bot for [Hack.Chat](https://github.com/AndrewBelt/hack.chat)
 
 ##Used Libs
 
-```shell
-npm install
-```
 On Windows:
 ```shell
+npm install
 run.bat
 ```
 On Linux/OSX:
 ```shell
+npm install
 ./run.sh
 ```
