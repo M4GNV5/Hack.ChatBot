@@ -1,4 +1,4 @@
-var md5 = require("md5");
+var md5 = require("MD5");
 var knowUsers = require("./users.json");
 
 var awaitingAuths = {};
@@ -38,4 +38,17 @@ var login = function(bot, sender, args)
 	}
 };
 
-module.exports = { login: login };
+var logout = function(bot, sender, args)
+{
+	if(typeof bot.permLevel[sender] == 'number')
+	{
+		delete bot.permLevel[sender];
+		bot.send("@" + sender + " logout successfull");
+	}
+	else
+	{
+		bot.send("@" + sender + " you are not logged in");
+	}
+}
+
+module.exports = { login: login, logout: logout };
