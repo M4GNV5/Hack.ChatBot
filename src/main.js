@@ -1,7 +1,7 @@
 var fs = require("fs");
 var path = require("path");
 
-var WebSocket = require("ws");
+var ChatConnection = require("./connection.js");
 var config = require("./config.json");
 
 fs.readdir("./src/commands", function(err, files)
@@ -9,7 +9,9 @@ fs.readdir("./src/commands", function(err, files)
 	if(err)
 		throw err;
 
-	var commands = {};
+	var bot = new ChatConnection(config.url, config.nick, config.channel);
+
+	bot.commands = {};
 	for(var i = 0; i < files.length; i++)
 	{
 		if(path.extname(files[i]) == ".js")
@@ -19,64 +21,49 @@ fs.readdir("./src/commands", function(err, files)
 			if(typeof cmds != 'object')
 				throw "Invalid command " + files[i];
 
+			if(typeof cmds.init == 'function')
+			{
+				cmds.init(bot, config);
+				delete cmds.init;
+			}
+
 			for(var key in cmds)
 			{
 				if(typeof cmds[key] != 'function')
 					throw "Invalid command " + files[i];
 
-				commands[key] = cmds[key];
+				bot.commands[key] = cmds[key];
 			}
 		}
 	}
 
-	var ws = new WebSocket(config.url);
-
-	var bot = {};
-	bot.commands = commands;
-	bot.send = function(text)
+	bot.on("chat", function(data)
 	{
-		var msgData = JSON.stringify({cmd: "chat", text: text});
-		ws.send(msgData);
-	};
-	bot.socket = ws;
-	bot.bans = [];
-	bot.permLevel = {};
+		console.log(bot.channel + "|" + data.nick + ": " + data.text);
 
-	ws.on("open", function()
-	{
-		console.log("connected");
-		var joinData = {cmd: "join", nick: config.nick, channel: config.channel};
-		ws.send(JSON.stringify(joinData));
-	});
+		if(bot.bans.indexOf(data.nick) !== -1)
+			return;
 
-	ws.on("message", function(data, flags)
-	{
-		var _data = JSON.parse(data);
-
-		if(_data.cmd == "chat")
+		var msg = data.text;
+		if(msg[0] == "!")
 		{
-			console.log(_data.nick + ": " + _data.text);
-
-			if(bot.bans.indexOf(_data.nick) !== -1)
-				return;
-
-			var msg = _data.text;
-			if(msg[0] == "!")
-			{
-				var cmd = msg.substr(1).split(" ")[0];
-				var args = msg.substr(2 + cmd.length).split(" ");
-				
-				if(typeof commands[cmd] == 'function' && commands.hasOwnProperty(cmd))
-					commands[cmd](bot, _data.nick, args);
-				else
-					bot.send("Unknown Command: " + cmd);
-			}
+			var cmd = msg.substr(1).split(" ")[0];
+			var args = msg.substr(2 + cmd.length).split(" ");
+			
+			if(typeof bot.commands[cmd] == 'function' && bot.commands.hasOwnProperty(cmd))
+				bot.commands[cmd](bot, data.nick, args);
+			else
+				bot.send("Unknown Command: " + cmd);
 		}
 	});
 
-	ws.on("close", function()
+	bot.on("info", function(data)
 	{
-		console.log("disconnected");
-		process.exit(0);
+		console.log(bot.channel + "| INFO : " + data.text);
+	});
+
+	bot.on("warn", function(data)
+	{
+		console.log(bot.channel + "| WARN : " + data.text);
 	});
 });

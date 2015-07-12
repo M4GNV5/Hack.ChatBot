@@ -3,6 +3,11 @@ var knowUsers = require("./users.json");
 
 var awaitingAuths = {};
 
+var init = function(bot)
+{
+	bot.permLevel = {};
+}
+
 var login = function(bot, sender, args)
 {
 	if(typeof awaitingAuths[sender] == 'undefined')
@@ -51,4 +56,4 @@ var logout = function(bot, sender, args)
 	}
 }
 
-module.exports = { login: login, logout: logout };
+module.exports = { init:init, login: login, logout: logout };

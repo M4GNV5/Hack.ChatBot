@@ -32,7 +32,7 @@ var wikiCallback = function(bot, sender, args)
 			});
 		});
 	}
-	else if(mode == "fast")
+	else if(mode == "quick")
 	{
 		wiki.search(input).then(function(result)
 		{
@@ -43,7 +43,7 @@ var wikiCallback = function(bot, sender, args)
 	}
 	else
 	{
-		bot.send("Wiki usage: !wiki search|page|fast ...");
+		bot.send("Wiki usage: !wiki search|page|quick ...");
 	}
 };
 

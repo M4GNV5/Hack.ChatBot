@@ -1,3 +1,8 @@
+var init = function(bot)
+{
+	bot.bans = [];
+};
+
 var ban = function(bot, sender, args)
 {
 	if(typeof bot.permLevel[sender] == 'undefined' || bot.permLevel[sender] < 1)
@@ -38,5 +43,5 @@ var pardon = function(bot, sender, args)
 	}
 };
 
-module.exports = { ban: ban, pardon: pardon, unban: pardon };
+module.exports = { init: init, ban: ban, pardon: pardon, unban: pardon };
 
