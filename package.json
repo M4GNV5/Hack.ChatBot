@@ -1,0 +1,13 @@
+{
+  "name": "hack.chatbot",
+  "version": "1.0.0",
+  "description": "Bot for Hack.Chat",
+  "main": "./src/main.js",
+  "dependencies": {
+    "google": "^1.3.0",
+    "md5": "^1.0.0",
+    "redwrap": "^0.0.4",
+    "wikijs": "^0.1.1",
+    "ws": "^0.7.2"
+  }
+}
