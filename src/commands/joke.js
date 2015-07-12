@@ -10,7 +10,7 @@ reddit.r("jokes", function(err, data, res)
 
 	for(var i = 0; i < posts.length; i++)
 	{
-		if(posts[i].data.domain != "self.Jokes" || posts[i].data.selftext.split("\n").length > 10)
+		if(posts[i].data.domain != "self.Jokes" || posts[i].data.selftext.split("\n").length > 10 || posts[i].data.selftext > 500)
 			continue;
 
 		var text = posts[i].data.title + "\n" + posts[i].data.selftext + " - http://redd.it/" + posts[i].data.id;

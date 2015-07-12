@@ -12,6 +12,7 @@ fs.readdir("./src/commands", function(err, files)
 	var bot = new ChatConnection(config.url, config.nick, config.channel);
 
 	bot.commands = {};
+	bot.init = [];
 	for(var i = 0; i < files.length; i++)
 	{
 		if(path.extname(files[i]) == ".js")
@@ -24,6 +25,7 @@ fs.readdir("./src/commands", function(err, files)
 			if(typeof cmds.init == 'function')
 			{
 				cmds.init(bot);
+				bot.init.push(cmds.init);
 				delete cmds.init;
 			}
 
@@ -59,11 +61,11 @@ fs.readdir("./src/commands", function(err, files)
 
 	bot.on("info", function(data)
 	{
-		console.log(bot.channel + "| INFO : " + data.text);
+		console.log(bot.channel + " | INFO : " + data.text);
 	});
 
 	bot.on("warn", function(data)
 	{
-		console.log(bot.channel + "| WARN : " + data.text);
+		console.log(bot.channel + " | WARN : " + data.text);
 	});
 });

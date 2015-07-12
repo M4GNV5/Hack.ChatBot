@@ -1,7 +1,8 @@
 var md5 = require("MD5");
-var knowUsers = require("./users.json");
+var knowUsers = require("./../data/users.json");
+var lib = require("./../lib.js");
 
-var awaitingAuths = {};
+var invitedUsers = [];
 
 var init = function(bot)
 {
@@ -10,37 +11,24 @@ var init = function(bot)
 
 var login = function(bot, sender, args)
 {
-	if(typeof awaitingAuths[sender] == 'undefined')
+	lib.awaitPrivateInput(bot, sender, 60000, function(_bot, joined)
 	{
-		var prefix = "";
-		for(var i = 0; i < 4; i++)
-		{
-			var rnd = Math.round(Math.random() * 83) + 43;
-			prefix += String.fromCharCode(rnd);
-		}
-
-		bot.send("@" + sender + " give me the md5 of " + prefix + " + your password");
-		awaitingAuths[sender] = prefix;
-	}
-	else
+		_bot.send("Awaiting password for " + sender + " in ?" + bot.channel);
+	}, function(_bot, _sender, text)
 	{
-		var arg = args.join(" ");
+		var pw = md5(text);
 
-		for(var key in knowUsers)
+		if(typeof knowUsers[pw] != 'undefined' && knowUsers.hasOwnProperty(pw))
 		{
-			if(md5(awaitingAuths[sender] + key) == arg)
-			{
-				user = knowUsers[key];
-				bot.permLevel[sender] = user.level;
+			var user = knowUsers[pw];
+			_bot.send("@" + _sender + " successfully authed as " + user.nick + " in ?" + bot.channel)
+			bot.send("@" + sender + " successfully authed as " + user.nick);
+			bot.permLevel[sender] = user.level;
 
-				bot.send("@" + sender + " successfully authed as " + user.nick);
-				delete awaitingAuths[sender];
-				return;
-			}
+			return true;
 		}
-		bot.send("@" + sender + " invalid hash");
-		delete awaitingAuths[sender];
-	}
+		return false;
+	});
 };
 
 var logout = function(bot, sender, args)

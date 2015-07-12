@@ -1,4 +1,4 @@
-var timeZones = require("./timezones.json");
+var timeZones = require("./../data/timezones.json");
 
 var time = function(bot, sender, args)
 {

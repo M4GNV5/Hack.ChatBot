@@ -1,9 +1,11 @@
-var ChatConnection = require("./../connection.js");
+var ChatConnection;
 
 var usersOnline = [];
 
 var init = function(bot)
 {
+	ChatConnection = bot.constructor;
+
 	bot.on("onlineSet", function(args)
 	{
 		usersOnline = args.nicks;

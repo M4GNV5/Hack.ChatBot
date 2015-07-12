@@ -1,5 +1,5 @@
 var fs = require("fs");
-var cmds = require("./ownCommands.json");
+var cmds = require("./../data/ownCommands.json");
 var _cmds = {};
 
 var createOwnCmdFunc = function(output)
@@ -65,7 +65,7 @@ var removeOwnCmd = function(bot, sender, args)
 
 var saveOwnCmds = function()
 {
-	fs.writeFile("./src/commands/ownCommands.json", JSON.stringify(cmds), function(err)
+	fs.writeFile("./src/data/ownCommands.json", JSON.stringify(cmds), function(err)
 	{
 		if(err)
 			throw err;
