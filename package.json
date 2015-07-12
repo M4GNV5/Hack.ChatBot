@@ -9,5 +9,23 @@
     "redwrap": "^0.0.4",
     "wikijs": "^0.1.1",
     "ws": "^0.7.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/M4GNV5/Hack.ChatBot"
+  },
+  "keywords": [
+    "chat",
+    "bot"
+  ],
+  "author": {
+    "name": "Jakob Löw",
+    "email": "eragonjml@googlemail.com",
+    "url": "https://github.com/M4GNV5"
+  },
+  "license": "4-clause BSD",
+  "bugs": {
+    "url": "https://github.com/M4GNV5/Hack.ChatBot/issues"
+  },
+  "homepage": "https://github.com/M4GNV5/Hack.ChatBot"
 }
