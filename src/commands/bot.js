@@ -41,34 +41,6 @@ var botCmd = function(bot, sender, args)
 
 		bot.send("@" + sender + " " + JSON.stringify(out));
 	}
-	else if(args[0] == "list")
-	{
-		bot.send("@" + sender + " channel: ?" + Object.keys(channels).join(" ?"));
-	}
-	else if(args[0] == "join")
-	{
-		var newBot = new ChatConnection(bot.url, bot.nick, args[1]);
-
-		newBot.on("chat", function(data) { newBot.parseCmd(data); });
-		newBot.on("info", function(data) { console.log(newBot.channel + " | INFO : " + data.text); });
-		newBot.on("warn", function(data) { console.log(newBot.channel + " | WARN : " + data.text); });
-
-		newBot.commands = bot.commands;
-		newBot.init = bot.init;
-		newBot.parseCmd = bot.parseCmd;
-
-		for(var i = 0; i < newBot.init.length; i++)
-		{
-			newBot.init[i](newBot);
-		}
-
-		channels[args[1]] = newBot;
-	}
-	else if(args[0] == "leave")
-	{
-		channels[args[1]].send("Goodbye!");
-		channels[args[1]].ws.close();
-	}
 	else if(args[0] == "perm")
 	{
 		bot.permLevel[args[1]] = parseInt(args[2]);
