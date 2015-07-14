@@ -24,6 +24,7 @@ var botCmd = function(bot, sender, args)
 
 	if(args[0] == "debug")
 	{
+		args[1] = args[1] || "";
 		var split = args[1].split(".");
 		var out = bot;
 		for(var i = 0; i < split.length; i++)
@@ -39,7 +40,14 @@ var botCmd = function(bot, sender, args)
 			}
 		}
 
-		bot.send("@" + sender + " " + JSON.stringify(out));
+		try
+		{
+			bot.send("@" + sender + " " + JSON.stringify(out));
+		}
+		catch(e)
+		{
+			bot.send("@" + sender + " error parsing json (maybe circular object?)");
+		}
 	}
 	else if(args[0] == "perm")
 	{
