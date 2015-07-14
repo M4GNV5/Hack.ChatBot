@@ -10,9 +10,13 @@ var init = function(bot)
 		}
 	};
 
-	if(!bot.config)
+	if(!bot.config.ownCommands)
 	{
 		bot.on("config", startup);
+	}
+	else
+	{
+		startup();
 	}
 };
 
