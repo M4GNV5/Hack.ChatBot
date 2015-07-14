@@ -7,6 +7,7 @@ var invitedUsers = [];
 var init = function(bot)
 {
 	bot.permLevel = {};
+	bot.permLevel[bot.nick] = 666;
 
 	bot.on("onlineRemove", function(data)
 	{
