@@ -5,7 +5,7 @@ var init = function(bot)
 
 var ban = function(bot, sender, args)
 {
-	if(typeof bot.permLevel[sender] == 'undefined' || bot.permLevel[sender] < 1)
+	if(typeof bot.permLevel[sender] == 'undefined' || bot.permLevel[sender] < 2)
 	{
 		bot.send("@" + sender + " you dont have the permission to use this command");
 		return;
