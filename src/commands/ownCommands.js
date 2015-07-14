@@ -6,7 +6,25 @@ var createOwnCmdFunc = function(output)
 {
 	return function(bot, sender, args)
 	{
-		bot.send(output);
+		var _output = output;
+
+		var replace = function(oldText, newText)
+		{
+			if(_output.indexOf(oldText) !== -1)
+				_output = _output.replace(oldText, newText);
+		}
+
+		replace("%url%", bot.url);
+		replace("%channel%", bot.channel);
+		replace("%self%", bot.nick);
+		replace("%sender%", sender);
+
+		for(var i = 0; i < args.length; i++)
+		{
+			replace("%" + i + "%", args[i]);
+		}
+
+		bot.send(_output);
 	};
 };
 
