@@ -2,11 +2,8 @@ var ascii = require("figlet");
 
 var createAsciiArt = function(bot, sender, args)
 {
-	if(typeof bot.permLevel[sender] == 'undefined' || bot.permLevel[sender] < 1)
-	{
-		bot.send("@" + sender + " you dont have the permission to use this command");
+	if(bot.requirePerm(sender, "ascii"))
 		return;
-	}
 
 	var text = args.join(" ");
 

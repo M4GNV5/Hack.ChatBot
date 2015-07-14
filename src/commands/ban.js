@@ -5,11 +5,8 @@ var init = function(bot)
 
 var ban = function(bot, sender, args)
 {
-	if(typeof bot.permLevel[sender] == 'undefined' || bot.permLevel[sender] < 2)
-	{
-		bot.send("@" + sender + " you dont have the permission to use this command");
+	if(bot.requirePerm(sender, "ban"))
 		return;
-	}
 
 	var bannUser = args.join(" ");
 	if(bot.bans.indexOf(bannUser) !== -1)
@@ -23,13 +20,10 @@ var ban = function(bot, sender, args)
 	}
 };
 
-var pardon = function(bot, sender, args)
+var unban = function(bot, sender, args)
 {
-	if(typeof bot.permLevel[sender] == 'undefined' || bot.permLevel[sender] < 1)
-	{
-		bot.send("@" + sender + " you dont have the permission to use this command");
+	if(bot.requirePerm(sender, "unban"))
 		return;
-	}
 
 	var pardonUser = args.join(" ");
 	if(bot.bans.indexOf(pardonUser) === -1)
@@ -43,5 +37,5 @@ var pardon = function(bot, sender, args)
 	}
 };
 
-module.exports = { init: init, ban: ban, pardon: pardon, unban: pardon };
+module.exports = { init: init, ban: ban, unban: unban };
 

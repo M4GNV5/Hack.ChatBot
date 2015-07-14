@@ -10,15 +10,12 @@ var init = function(bot)
 
 var botCmd = function(bot, sender, args)
 {
-	if(typeof bot.permLevel[sender] == 'undefined' || bot.permLevel[sender] < 5)
-	{
-		bot.send("@" + sender + " you dont have the permission to use this command");
+	if(bot.requirePerm(sender, "bot"))
 		return;
-	}
 
 	if(typeof args[0] == 'undefined')
 	{
-		bot.send("@" + sender + " usage !bot debug|list|join|perm");
+		bot.send("@" + sender + " usage !bot debug|perm");
 		return;
 	}
 

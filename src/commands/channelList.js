@@ -1,5 +1,4 @@
 var fs = require("fs");
-var channel = require("./../data/channel.json");
 
 var channelList = function(bot, sender, args)
 {
@@ -12,15 +11,7 @@ var channelList = function(bot, sender, args)
 		}
 
 		var name = args[1];
-		channel.push(name);
-
-		fs.writeFile("./src/data/channel.json", JSON.stringify(channel), function(err)
-		{
-			if(err)
-				throw err;
-
-			bot.send("Added channel ?" + name + " to the list");
-		});
+		bot.channel.push(name);
 	}
 	else if(typeof args[0] != 'undefined' && args[0] == "remove" && typeof args[1] != 'undefined')
 	{
@@ -32,17 +23,9 @@ var channelList = function(bot, sender, args)
 
 		var name = args[1];
 
-		if(channel.indexOf(name) !== -1)
+		if(bot.channel.indexOf(name) !== -1)
 		{
-			channel.splice(channel.indexOf(name), 1);
-
-			fs.writeFile("./src/data/channel.json", JSON.stringify(channel), function(err)
-			{
-				if(err)
-					throw err;
-
-				bot.send("Removed channel ?" + name + " from the list");
-			});
+			bot.channel.splice(bot.channel.indexOf(name), 1);
 		}
 		else
 		{
@@ -51,7 +34,7 @@ var channelList = function(bot, sender, args)
 	}
 	else
 	{
-		bot.send("Known public channel: ?" + channel.join(" ?"));
+		bot.send("Known public channel: ?" + bot.channel.join(" ?"));
 	}
 }
 

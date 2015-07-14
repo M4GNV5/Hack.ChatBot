@@ -1,11 +1,9 @@
-var timeZones = require("./../data/timezones.json");
-
 var time = function(bot, sender, args)
 {
 	console.log(args[0]);
-	if(typeof timeZones[args[0]] != 'undefined')
+	if(typeof bot.config.timeZones[args[0]] != 'undefined')
 	{
-		var zone = timeZones[args[0]];
+		var zone = bot.config.timezones[args[0]];
 		var diff = zone[1] * 60 * 60 * 1000;
 		var current = new Date();
 		var offset = current.getTimezoneOffset() * 60 * 1000;
@@ -16,7 +14,7 @@ var time = function(bot, sender, args)
 	}
 	else
 	{
-		bot.send("Unknown time zone");
+		bot.send("Unknown time zone, try !timezones");
 	}
 }
 

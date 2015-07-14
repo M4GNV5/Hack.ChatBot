@@ -1,5 +1,4 @@
 var md5 = require("MD5");
-var knowUsers = require("./../data/users.json");
 var lib = require("./../lib.js");
 
 var invitedUsers = [];
@@ -16,6 +15,22 @@ var init = function(bot)
 			delete bot.permLevel[data.nick];
 		}
 	});
+
+	bot.requirePerm = function(sender, name)
+	{
+		var senderLvl = bot.permLevel[sender] || 0;
+		var requiredLvl = bot.config.requiredPerm[name] || 0
+
+		if(requiredLvl <= senderLvl)
+		{
+			return false;
+		}
+		else
+		{
+			bot.send("@" + sender + " you dont have the permission to use this command");
+			return true;
+		}
+	}
 }
 
 var login = function(bot, sender, args)
@@ -27,9 +42,9 @@ var login = function(bot, sender, args)
 	{
 		var pw = md5(text);
 
-		if(typeof knowUsers[pw] != 'undefined' && knowUsers.hasOwnProperty(pw))
+		if(typeof bot.config.users[pw] != 'undefined' && bot.config.users.hasOwnProperty(pw))
 		{
-			var user = knowUsers[pw];
+			var user = bot.config.users[pw];
 			bot.send("@" + sender + " successfully authed as " + user.nick);
 			bot.permLevel[sender] = user.level;
 
