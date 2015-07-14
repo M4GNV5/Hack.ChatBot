@@ -82,13 +82,17 @@ var configCmd = function(bot, sender, args)
 	}
 	else if(args[0] == "save")
 	{
-		fs.writeFile("./../data/cmdConfig.json", JSON.stringify(bot.config), function(err)
+		for(var key in bot.config)
 		{
-			if(err)
-				throw err;
+			if(!bot.config.hasOwnProperty(key))
+				continue;
 
-			bot.send("@" + sender + " saved config");
-		});
+			fs.writeFile("./src/data/" + key + ".json", JSON.stringify(bot.config[key]), function(err)
+			{
+				if(err)
+					throw err;
+			});
+		}
 	}
 }
 
