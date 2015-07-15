@@ -1,9 +1,9 @@
 var time = function(bot, sender, args)
 {
-	console.log(args[0]);
+	args[0] = args[0].toUpperCase();
 	if(typeof bot.config.timezones[args[0]] != 'undefined')
 	{
-		var zone = bot.config.timezones[args[0].toUpperCase()];
+		var zone = bot.config.timezones[args[0]];
 		var diff = zone[1] * 60 * 60 * 1000;
 		var current = new Date();
 		var offset = current.getTimezoneOffset() * 60 * 1000;
