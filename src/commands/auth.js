@@ -19,7 +19,7 @@ var init = function(bot)
 	bot.requirePerm = function(sender, name)
 	{
 		var senderLvl = bot.permLevel[sender] || 0;
-		var requiredLvl = bot.config.requiredPerm[name] || 0
+		var requiredLvl = bot.config.requiredPerm[name] || 0;
 
 		if(requiredLvl <= senderLvl)
 		{
