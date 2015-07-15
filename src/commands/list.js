@@ -31,13 +31,22 @@ var list = function(bot, sender, args)
 	else
 	{
 		var channel = args[0];
+		if (channel[0] === "?")
+			channel = channel.substr(1);
 		var nick = Math.random().toString(36).substring(3, 7);
 
 		var closed = false;
 		var _bot = new ChatConnection(bot.url, nick, channel);
 		_bot.on("onlineSet", function(args)
 		{
-			bot.send("Users online in ?" + channel + ": " + args.nicks.join(", "));
+			args.nicks.splice(args.nicks.indexOf(nick), 1);
+			var text = "Users online in ?" + channel + ": " + args.nicks.join(", ");
+
+			if (args.nicks.length == 0)
+				bot.send("?" + channel+ " is empty.");
+			else
+				bot.send(text);
+			
 			closed = true;
 			_bot.ws.close();
 		});
