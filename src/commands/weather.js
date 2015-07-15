@@ -2,14 +2,24 @@ var weather = require("weather-js");
 
 var weatherCommand = function(bot, sender, args)
 {
-	var degree = args[0] || "C";
-	var location = args.slice(1).join(" ");
+	var degreeType = "C";
+	var location;
 
-	weather.find({search: location, degreeType: degree}, function(err, result)
+	if(args[args.length - 1] == "C" || args[args.length - 1] == "F")
+	{
+		degreeType = args[args.length - 1];
+		location = args.slice(0, args.length - 1).join(" ");
+	}
+	else
+	{
+		location = args.join(" ");
+	}
+
+	weather.find({search: location, degreeType: degreeType}, function(err, result)
 	{
 		if(err)
 		{
-			bot.send("Error retrieving weather. Usage: !weather <degreeType> <location ...>");
+			bot.send("Error retrieving weather. Usage: !weather <location ...> [C|F]");
 			return;
 		}
 
