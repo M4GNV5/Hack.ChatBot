@@ -10,7 +10,8 @@
     "wikijs": "^0.1.1",
     "ws": "^0.7.2",
     "figlet": "^1.1.1",
-    "mathjs": "^1.7.1"
+    "mathjs": "^1.7.1",
+    "weather-js": "^1.0.2"
   },
   "repository": {
     "type": "git",
