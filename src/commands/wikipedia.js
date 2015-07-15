@@ -3,22 +3,19 @@ var wiki = new Wiki();
 
 var wikiCallback = function(bot, sender, args)
 {
-	var mode = args[0];
-	var input = args.slice(1).join(" ");
+	var input = args.join(" ");
 
-	if(mode == "search")
+	wiki.search(input).then(function(result)
 	{
-		wiki.search(input).then(function(result)
+		var page = result.results[0];
+
+		if(typeof page == 'undefined')
 		{
-			var results = result.results;
+			bot.send("No results found!");
+			return;
+		}
 
-			var msg = "Page results: " + results.slice(0, 5).join(", ");
-			bot.send(msg);
-		});
-	}
-	else if(mode == "page")
-	{
-		wiki.page(input).then(function(page)
+		wiki.page(page).then(function(page)
 		{
 			page.summary().then(function(summary)
 			{
@@ -31,20 +28,7 @@ var wikiCallback = function(bot, sender, args)
 				bot.send(summary);
 			});
 		});
-	}
-	else if(mode == "quick")
-	{
-		wiki.search(input).then(function(result)
-		{
-			var page = result.results[0];
-
-			wikiCallback(bot, sender, ["page", page]);
-		});
-	}
-	else
-	{
-		bot.send("Wiki usage: !wiki search|page|quick ...");
-	}
+	});
 };
 
 module.exports = { wiki: wikiCallback };
