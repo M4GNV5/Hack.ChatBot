@@ -5,7 +5,7 @@ exports.awaitPrivateInput = function(mainBot, user, timeout, joinCb, messageCb)
 	var invitation = {cmd: "invite", nick: user};
 	mainBot.ws.send(JSON.stringify(invitation));
 
-	mainBot.on("info", function(args)
+	var getPrivateInput = function(args)
 	{
 		var split = args.text.split(" ");
 
@@ -18,6 +18,9 @@ exports.awaitPrivateInput = function(mainBot, user, timeout, joinCb, messageCb)
 			nick += " " + split[i];
 		}
 		nick = nick.trim();
+
+		if(nick != user)
+			return;
 
 		var channel = split[split.length - 1].substr(1);
 
@@ -35,6 +38,7 @@ exports.awaitPrivateInput = function(mainBot, user, timeout, joinCb, messageCb)
 			if(finished)
 			{
 				bot.ws.close();
+				mainBot.removeListener("info", getPrivateInput);
 				closed = true;
 			}
 		});
@@ -44,8 +48,13 @@ exports.awaitPrivateInput = function(mainBot, user, timeout, joinCb, messageCb)
 			setTimeout(function()
 			{
 				if(!closed)
+				{
 					bot.ws.terminate();
+					mainBot.removeListener("info", getPrivateInput);
+				}
 			}, timeout);
 		}
 	});
+
+	mainBot.on("info", getPrivateInput);
 }
