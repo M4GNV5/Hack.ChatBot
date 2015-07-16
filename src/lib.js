@@ -54,7 +54,7 @@ exports.awaitPrivateInput = function(mainBot, user, timeout, joinCb, messageCb)
 				}
 			}, timeout);
 		}
-	});
+	};
 
 	mainBot.on("info", getPrivateInput);
 }
