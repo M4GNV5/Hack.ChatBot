@@ -25,7 +25,8 @@ var plot = function(bot, sender, args)
 		for(var i = -10; i <= 10; i++)
 		{
 			var result = func(i);
-			if(result > -5 && result < 5 && result == Math.ceil(result))
+			result = Math.round(result);
+			if(result > -5 && result < 5)
 				lines[result] = lines[result].substr(0, i + 10) + "x" + lines[result].substr(i+11);
 		}
 
