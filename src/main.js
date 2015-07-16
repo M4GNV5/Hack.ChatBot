@@ -42,7 +42,7 @@ fs.readdir("./src/commands", function(err, files)
 
 	bot.parseCmd = function(data)
 	{
-		console.log(this.channel + " | " + data.nick + ": " + data.text);
+		console.log(data.nick + ": " + data.text);
 
 		if(this.bans.indexOf(data.nick) !== -1)
 			return;
@@ -67,11 +67,11 @@ fs.readdir("./src/commands", function(err, files)
 
 	bot.on("info", function(data)
 	{
-		console.log(bot.channel + " | INFO : " + data.text);
+		console.log("INFO : " + data.text);
 	});
 
 	bot.on("warn", function(data)
 	{
-		console.log(bot.channel + " | WARN : " + data.text);
+		console.log("WARN : " + data.text);
 	});
 });
