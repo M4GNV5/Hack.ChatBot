@@ -39,11 +39,14 @@ var list = function(bot, sender, args)
 		var _bot = new ChatConnection(bot.url, nick, channel);
 		_bot.on("onlineSet", function(args)
 		{
+			args.nicks.splice(args.nicks.indexOf(nick), 1);
 			var text = "Users online in ?" + channel + ": " + args.nicks.join(", ");
-			if (text === "Users online in ?" + channel + ": " + nick)
+
+			if (args.nicks.length == 0)
 				bot.send("?" + channel+ " is empty.");
 			else
 				bot.send(text);
+			
 			closed = true;
 			_bot.ws.close();
 		});
