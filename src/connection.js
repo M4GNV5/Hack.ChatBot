@@ -30,6 +30,16 @@ function ChatConnection(url, nick, channel)
 
 		that.emit(_data.cmd, _data);
 	});
+
+	var pingIntervalId = setInterval(function()
+	{
+		var pingPackage = JSON.stringify({cmd: "ping"});
+		this.ws.send(pingPackage);
+	}, 240000);
+	this.ws.on("close", function()
+	{
+		clearInterval(pingIntervalId);
+	});
 }
 util.inherits(ChatConnection, events.EventEmitter);
 
