@@ -34,7 +34,7 @@ function ChatConnection(url, nick, channel)
 	var pingIntervalId = setInterval(function()
 	{
 		var pingPackage = JSON.stringify({cmd: "ping"});
-		this.ws.send(pingPackage);
+		that.ws.send(pingPackage);
 	}, 240000);
 	this.ws.on("close", function()
 	{
