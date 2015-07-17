@@ -14,6 +14,10 @@ if(require.main === module)
 	{
 		try
 		{
+			context.sender = message.sender;
+			context.channel = message.channel;
+			context.self = message.self;
+
 			var result = vm.runInContext(message.code, context);
 			if(_out.length > 0)
 				process.send({out: _out.join(" ")});
@@ -53,7 +57,7 @@ else
 
 			pFinished = true;
 		});
-		p.send({code: code});
+		p.send({sender: sender, channel: bot.channel, self: bot.nick, code: code});
 
 		setTimeout(function()
 		{
