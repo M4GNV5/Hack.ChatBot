@@ -5,7 +5,7 @@ var autoCommand = function(bot, sender, args)
 	var cmdResults = [];
 	for(var cmd in bot.commands)
 	{
-		if(cmd.length > 3 && arg.indexOf(cmd) !== -1)
+		if(cmd.length > 3 && args.indexOf(cmd) !== -1)
 		{
 			cmdResults.push(cmd);
 		}
