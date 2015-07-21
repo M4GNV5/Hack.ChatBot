@@ -40,13 +40,12 @@ fs.readdir("./src/commands", function (err, files) {
 	
 		if (data.nick == config.nick)
 			return;
-		
+			
 		if (this.bans.indexOf(data.nick.toLowerCase()) !== -1) {
 			this.send(data.nick + " you are banned.");
-			console.log(this.bans);
 			return;
 		}
-
+		
 		var msg = data.text;
 		if (msg[0] == "!") {
 			var cmd = msg.substr(1).split(" ")[0];
@@ -57,6 +56,15 @@ fs.readdir("./src/commands", function (err, files) {
 			else
 				this.send("Unknown Command: " + cmd);
 		}
+		
+		if (msg[0] == "@") {
+			var user = msg.substr(1).split(" ")[0];
+			if (this.afks.indexOf(user) !== -1) {
+				this.send(user + " is AFK.");
+				return;
+			}
+		}
+		
 	}
 
 	bot.on("chat", function (data) {
@@ -65,6 +73,12 @@ fs.readdir("./src/commands", function (err, files) {
 
 	bot.on("info", function (data) {
 		console.log(bot.channel + " | INFO : " + data.text);
+		if (this.afks.indexOf("left") !== -1) {
+			var user = msg.substr(1).split(" ")[0];
+			if (this.afks.indexOf(user) !== -1) {
+				_removeAFK(bot, user);
+			}
+		}
 	});
 
 	bot.on("warn", function (data) {
