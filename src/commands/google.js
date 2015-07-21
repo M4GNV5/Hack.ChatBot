@@ -1,31 +1,25 @@
 var google = require("google");
 google.resultsPerPage = 5;
 
-var googleCallback = function(bot, sender, args)
-{
+var googleCallback = function (bot, sender, args) {
 	var search = args.join(" ");
 
-	google(search, function(err, next, links)
-	{
-		if(err)
-		{
+	google(search, function (err, next, links) {
+		if (err) {
 			bot.send("Error processing google search: " + err);
 			return;
 		}
 
-		if(links.length == 0)
-		{
-			bot.send("No results found!");
+		if (links.length == 0) {
+			bot.send("Syntax is !google [Search term]");
 			return;
 		}
 
 		var result = [];
 
 		var max = 3;
-		for(var i = 0; i < links.length && i < max; i++)
-		{
-			if(typeof links[i].href == 'undefined' || !links[i].href)
-			{
+		for (var i = 0; i < links.length && i < max; i++) {
+			if (typeof links[i].href == 'undefined' || !links[i].href) {
 				max++;
 				continue;
 			}
@@ -36,8 +30,7 @@ var googleCallback = function(bot, sender, args)
 	});
 };
 
-module.exports =
-{
+module.exports = {
 	g: googleCallback,
 	google: googleCallback
 };
