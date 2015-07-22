@@ -1,23 +1,30 @@
-var init = function (bot) {
+var init = function(bot) 
+{
 	bot.bans = [];
 };
 
-var _ban = function (bot, time, user) {
+var _ban = function(bot, time, user) 
+{
 	
 	bot.bans.push(user);
 
 	if(time > 0)
-		setTimeout(function () {
+	{
+		setTimeout(function() 
+		{
 			_unban(bot, user);
 		}, time);
+	}
 }
-var _unban = function (bot, user) {
+var _unban = function(bot, user)
+{
 	
 	if (bot.bans.indexOf(user) !== -1)
 		bot.bans.splice(bot.bans.indexOf(user), 1);
 }
 
-var ban = function (bot, sender, args) {
+var ban = function(bot, sender, args) 
+{
 	
 	if(bot.requirePerm(sender, "ban"))
 		return;
@@ -35,7 +42,8 @@ var ban = function (bot, sender, args) {
 	}
 };
 
-var unban = function (bot, sender, args) {
+var unban = function(bot, sender, args) 
+{
 	
 	if(bot.requirePerm(sender, "unban"))
 		return;
@@ -52,7 +60,8 @@ var unban = function (bot, sender, args) {
 	}
 };
 
-module.exports = {
+module.exports = 
+{
 	init: init,
 	ban: ban,
 	unban: unban

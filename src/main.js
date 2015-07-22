@@ -4,7 +4,8 @@ var path = require("path");
 var ChatConnection = require("./connection.js");
 var config = require("./config.json");
 
-fs.readdir("./src/commands", function (err, files) {
+fs.readdir("./src/commands", function(err, files) 
+{
 	if(err)
 		throw err;
 
@@ -39,7 +40,8 @@ fs.readdir("./src/commands", function (err, files) {
 		}
 	}
 
-	bot.parseCmd = function (data) {
+	bot.parseCmd = function(data) 
+	{
 		console.log(this.channel + " | " + data.nick + ": " + data.text);
 	
 		if(data.nick == config.nick)
@@ -66,7 +68,7 @@ fs.readdir("./src/commands", function (err, files) {
 		if(msg[0] == "@") 
 		{
 			var user = msg.substr(1).split(" ")[0];
-			if(this.afks.indexOf(user) !== -1) 
+			if(this.afks.indexOf(user) !== -1)
 			{
 				this.send(user + " is AFK.");
 				return;
@@ -74,20 +76,17 @@ fs.readdir("./src/commands", function (err, files) {
 		}		
 	}
 
-	bot.on("chat", function (data) {
+	bot.on("chat", function(data)
+	{
 		bot.parseCmd(data);
 	});
 
-	bot.on("info", function (data) {
+	bot.on("info", function (data) 
+	{
 		console.log(bot.channel + " | INFO : " + data.text);
 	});
 
 	bot.on("warn", function (data) {
 		console.log(bot.channel + " | WARN : " + data.text);
-	});
-	
-	bot.on("onlineRemove", function (data) {
-		if(this.afks.indexOf(data.nick) !== -1) 
-			this.commands['afk'](this, data.nick);
 	});
 });
