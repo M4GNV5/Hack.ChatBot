@@ -6,7 +6,6 @@ var init = function(bot)
 	{
 		if(data.nick !== bot.nick)
 		{
-			console.log(bot.nick);
 			for(var i = 0; i < bot.afks.length; i++)
 			{
 				var name = "@" + bot.afks[i];
