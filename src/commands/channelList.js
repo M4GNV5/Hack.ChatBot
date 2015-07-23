@@ -1,5 +1,3 @@
-var fs = require("fs");
-
 var channelList = function(bot, sender, args)
 {
 	if(typeof args[0] != 'undefined' && args[0] == "add" && typeof args[1] != 'undefined')
