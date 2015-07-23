@@ -4,7 +4,7 @@ var init = function(bot)
 
 	bot.on("chat", function(data)
 	{
-		for(var i = 0; i < bot.afks.length, i++)
+		for(var i = 0; i < bot.afks.length; i++)
 		{
 			var name = "@" + bot.afks[i];
 			if(data.text.indexof(name) !== -1)
