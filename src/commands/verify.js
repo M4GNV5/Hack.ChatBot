@@ -1,6 +1,23 @@
 var onlineTripcodes = {};
 var init = function(bot)
 {
+	bot.permLevel = {};
+	bot.requirePerm = function(sender, name)
+	{
+		var senderLvl = bot.permLevel[sender] || 0;
+		var requiredLvl = bot.config.requiredPerm[name] || 0;
+
+		if(requiredLvl <= senderLvl)
+		{
+			return false;
+		}
+		else
+		{
+			bot.send("@" + sender + " you dont have the permission to use this command");
+			return true;
+		}
+	}
+
 	bot.on("chat", function(data)
 	{
 		if(typeof data.trip != 'undefined')
@@ -16,6 +33,8 @@ var init = function(bot)
 	{
 		if(typeof onlineTripcodes[data.nick] != 'undefined')
 			delete onlineTripcodes[data.nick];
+		if(typeof bot.permLevel[data.nick] != 'undefined')
+			delete bot.permLevel[data.nick];
 	});
 }
 
