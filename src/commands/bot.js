@@ -1,11 +1,13 @@
 var ChatConnection;
 
 var channels = {};
+var users = {};
 
 var init = function(bot)
 {
 	ChatConnection = bot.constructor;
 	channels[bot.channel] = bot;
+	users[bot.usersTripCode] = bot;
 }
 
 var botCmd = function(bot, sender, args)

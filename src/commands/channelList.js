@@ -4,7 +4,7 @@ var channelList = function(bot, sender, args)
 {
 	if(typeof args[0] != 'undefined' && args[0] == "add" && typeof args[1] != 'undefined')
 	{
-		if(bot.requirePerm(sender, "channel"))
+		if(bot.requirePerm(sender, "channelAdd"))
 		return;
 
 		var name = args[1];
