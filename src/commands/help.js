@@ -10,7 +10,7 @@ var help = function(bot, sender, args)
 		if(requiredLvl <= lvl)
 			cmds.push(key);
 	}
-
+	cmds = cmds.sort();
 	bot.send("$\\Large\\text{hack.chat bot by M4GNV5}$\nCommands: !" + cmds.join(", !"));
 }
 

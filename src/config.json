@@ -1,5 +1,5 @@
 {
-	"nick": "Hack.Chat Bot",
+	"nick": "HackChatBot",
 	"channel": "programming",
 	"url": "wss://hack.chat/chat-ws:22"
 }
