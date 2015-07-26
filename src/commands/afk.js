@@ -9,11 +9,13 @@ var init = function(bot)
 			for(var i = 0; i < bot.afks.length; i++)
 			{
 				var name = "@" + bot.afks[i];
-				if(data.text.indexOf(name) !== -1)
-					bot.send(name + " is afk!");
+				if(data.nick === bot.afks[i])
+					_removeAFK(bot, data.nick);
+				else if(data.text.indexOf(name) !== -1)
+					bot.send("@" + data.nick + " " + name + " is afk!");
 			}
 		}
-	});	
+	});
 
 	bot.on("onlineRemove", function (data)
 	{
@@ -29,7 +31,10 @@ var _addAFK = function(bot, user)
 var _removeAFK = function(bot, user)
 {
 	if(bot.afks.indexOf(user) !== -1)
+	{
 		bot.afks.splice(bot.afks.indexOf(user), 1);
+		bot.send("@" + user +" is no longer AFK");
+	}
 }
 
 var _checkLeave = function(bot, data)
