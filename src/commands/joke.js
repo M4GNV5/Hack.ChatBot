@@ -16,7 +16,6 @@ request("http://reddit.com/r/jokes/.json", function(err, res, data)
 		if(posts[i].data.domain != "self.Jokes" || selfText.split("\n").length > 10 || selfText.length > 500)
 			continue;
 
-		console.dir(posts[i].data.title);
 		var text = posts[i].data.title + "\n" + selfText + " - http://redd.it/" + posts[i].data.id;
 		jokes.push(text);
 	}
