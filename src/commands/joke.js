@@ -1,10 +1,12 @@
-var reddit = require("redwrap");
+var request = require("request");
 
 var jokes = [];
-reddit.r("jokes", function(err, data, res)
+request("http://reddit.com/r/jokes/.json", function(err, res, data)
 {
 	if(err)
 		throw err;
+
+	data = JSON.parse(data);
 
 	var posts = data.data.children;
 
@@ -14,6 +16,7 @@ reddit.r("jokes", function(err, data, res)
 		if(posts[i].data.domain != "self.Jokes" || selfText.split("\n").length > 10 || selfText.length > 500)
 			continue;
 
+		console.dir(posts[i].data.title);
 		var text = posts[i].data.title + "\n" + selfText + " - http://redd.it/" + posts[i].data.id;
 		jokes.push(text);
 	}
