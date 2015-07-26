@@ -4,13 +4,16 @@ var init = function(bot)
 
 	bot.on("chat", function(data)
 	{
-		for(var i = 0; i < bot.afks.length; i++)
+		if(data.nick !== bot.nick)
 		{
-			var name = "@" + bot.afks[i];
-			if(data.text.indexof(name) !== -1)
-				bot.send(name + " is afk!");
+			for(var i = 0; i < bot.afks.length; i++)
+			{
+				var name = "@" + bot.afks[i];
+				if(data.text.indexOf(name) !== -1)
+					bot.send(name + " is afk!");
+			}
 		}
-	});
+	});	
 
 	bot.on("onlineRemove", function (data)
 	{
