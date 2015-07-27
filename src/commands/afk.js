@@ -4,6 +4,10 @@ var init = function(bot)
 
 	bot.on("chat", function(data)
 	{
+		var index = bot.afks.indexOf(data.nick);
+		if(index !== -1)
+			bot.afks.splice(index, 1);
+
 		if(data.nick !== bot.nick)
 		{
 			for(var i = 0; i < bot.afks.length; i++)
@@ -13,40 +17,27 @@ var init = function(bot)
 					bot.send(name + " is afk!");
 			}
 		}
-	});	
+	});
 
 	bot.on("onlineRemove", function (data)
 	{
-		_checkLeave(bot, data);
+		if(bot.afks.indexOf(sender) !== -1)
+			bot.afks.splice(bot.afks.indexOf(user), 1);
 	});
 };
 
-var _addAFK = function(bot, user)
-{
-	bot.afks.push(user);
-}
-
-var _removeAFK = function(bot, user)
-{
-	if(bot.afks.indexOf(user) !== -1)
-		bot.afks.splice(bot.afks.indexOf(user), 1);
-}
-
-var _checkLeave = function(bot, data)
-{
-	if(bot.afks.indexOf(data.nick) !== -1)
-			_removeAFK(bot, data.nick);
-}
-
 var afk = function(bot, sender, args)
 {
-
-	if(bot.afks.indexOf(sender) !== -1)
-		_removeAFK(bot, sender);
+	var index = bot.afks.indexOf(sender);
+	if(index !== -1)
+	{
+		bot.afks.splice(index, 1);
+		bot.send("Welcome back @" + sender + "");
+	}
 	else
 	{
 		bot.send("User @" + sender + " is now AFK");
-		_addAFK(bot, sender);
+		bot.afks.push(sender);
 	}
 };
 
