@@ -16,9 +16,10 @@ if(require.main === module)
 			};
 			context.out = out;
 
-			context.sender = message.sender;
-			context.channel = message.channel;
-			context.self = message.self;
+			for(var name in message.args)
+			{
+				context[name] = message.args[name];
+			}
 
 			var result = vm.runInContext(message.code, context);
 			if(_out.length > 0)
@@ -69,7 +70,7 @@ else
 		}
 		else if(args[0] == "pastebin")
 		{
-			var id = args.slice(1).join(" ");
+			var id = args[1];
 			request("http://pastebin.com/raw.php?i=" + id, function(err, res, code)
 			{
 				if(err)
@@ -78,7 +79,7 @@ else
 					return;
 				}
 
-				runCode(code);
+				runCode(code, args.slice(2));
 			});
 		}
 		else
@@ -86,8 +87,16 @@ else
 			runCode(args.join(" "));
 		}
 
-		function runCode(code)
+		function runCode(code, args)
 		{
+			var _args = {};
+			_args.sender = sender;
+			_args.channel = bot.channel;
+			_args.self = bot.nick;
+			_args.args = args;
+
+
+
 			var pFinished = false;
 
 			var p = childP.fork("./src/commands/js.js");
@@ -103,7 +112,7 @@ else
 
 				pFinished = true;
 			});
-			p.send({sender: sender, channel: bot.channel, self: bot.nick, code: code, context: userContexts[sender]});
+			p.send({args: _args, code: code, context: userContexts[sender]});
 
 			setTimeout(function()
 			{
