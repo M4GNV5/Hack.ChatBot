@@ -21,8 +21,9 @@ var init = function(bot)
 
 	bot.on("onlineRemove", function (data)
 	{
-		if(bot.afks.indexOf(sender) !== -1)
-			bot.afks.splice(bot.afks.indexOf(user), 1);
+		var index = bot.afks.indexOf(data.nick);
+		if(index !== -1)
+			bot.afks.splice(index, 1);
 	});
 };
 
