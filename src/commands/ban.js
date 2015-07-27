@@ -25,7 +25,7 @@ var _unban = function(bot, user)
 
 var ban = function(bot, sender, args)
 {
-	if(bot.requirePerm(sender, "ban"))
+	if(bot.requirePerm(sender, "botBan"))
 		return;
 
 	var time = parseInt(args[0]) * 1000 || 60000;
@@ -54,7 +54,7 @@ var ban = function(bot, sender, args)
 var unban = function(bot, sender, args)
 {
 
-	if(bot.requirePerm(sender, "unban"))
+	if(bot.requirePerm(sender, "botUnban"))
 		return;
 
 	var pardonUser = args.join(" ");
@@ -74,6 +74,6 @@ var unban = function(bot, sender, args)
 module.exports =
 {
 	init: init,
-	ban: ban,
-	unban: unban
+	botBan: ban,
+	botUnban: unban
 };
