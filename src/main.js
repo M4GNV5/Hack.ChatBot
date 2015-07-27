@@ -47,22 +47,22 @@ fs.readdir("./src/commands", function(err, files)
 		if(data.nick == config.nick)
 			return;
 
-		if(this.bans.indexOf(data.nick.toLowerCase()) !== -1)
-		{
-			this.send(data.nick + " you are banned.");
-			return;
-		}
-
 		var msg = data.text;
 		if(msg[0] == "!")
 		{
-			var cmd = msg.substr(1).split(" ")[0];
-			var args = msg.substr(2 + cmd.length).split(" ");
-
-			if(typeof this.commands[cmd] == 'function' && this.commands.hasOwnProperty(cmd))
-				this.commands[cmd](this, data.nick, args, data);
-			else
-				this.send("Unknown Command: " + cmd);
+            ban.
+            if(this.bans.indexOf(data.nick.toLowerCase()) !== -1)
+                this.send("@" + data.nick + " you are banned from using this bot.");
+            else
+            {
+			 var cmd = msg.substr(1).split(" ")[0];
+			 var args = msg.substr(2 + cmd.length).split(" ");
+    
+    			if(typeof this.commands[cmd] == 'function' && this.commands.hasOwnProperty(cmd))
+    				this.commands[cmd](this, data.nick, args, data);
+    			else
+    				this.send("Unknown Command: " + cmd);
+            }
 		}
 	}
 
