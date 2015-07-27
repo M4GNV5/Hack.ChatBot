@@ -6,7 +6,10 @@ var init = function(bot)
 	{
 		var index = bot.afks.indexOf(data.nick);
 		if(index !== -1)
+		{
 			bot.afks.splice(index, 1);
+			bot.send("Welcome back @" + data.nick + "");
+		}
 
 		if(data.nick !== bot.nick)
 		{
