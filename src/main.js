@@ -50,7 +50,6 @@ fs.readdir("./src/commands", function(err, files)
 		var msg = data.text;
 		if(msg[0] == "!")
 		{
-            ban.
             if(this.bans.indexOf(data.nick.toLowerCase()) !== -1)
                 this.send("@" + data.nick + " you are banned from using this bot.");
             else
