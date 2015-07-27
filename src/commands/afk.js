@@ -11,11 +11,11 @@ var init = function(bot)
 				var name = "@" + bot.afks[i];
 				if(data.nick === bot.afks[i])
 					_removeAFK(bot, data.nick);
-                else if(data.text.indexOf(name) !== -1)
-					bot.send(name + " is afk!");
+				else if(data.text.indexOf(name) !== -1)
+					bot.send("@" + data.nick + " " + name + " is afk!");
 			}
 		}
-	});	
+	});
 
 	bot.on("onlineRemove", function (data)
 	{
