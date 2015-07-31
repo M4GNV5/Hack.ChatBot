@@ -48,10 +48,7 @@ fs.readdir("./src/commands", function(err, files)
 			return;
 
 		if(this.bans.indexOf(data.nick.toLowerCase()) !== -1)
-		{
-			this.send(data.nick + " you are banned.");
 			return;
-		}
 
 		var msg = data.text;
 		if(msg[0] == "!")
