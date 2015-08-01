@@ -42,17 +42,25 @@ var _verify = function(bot, sender, trip, user)
 {
 	if(user == "vortico")
 			bot.send("$\\color{red}{vortico}$ is always $\\color{lightgreen}{valid}$!");
-	else if(bot.config.tripCodes[user])
+
+	var _user;
+	for(var name in bot.config.tripCodes)
 	{
-		if(bot.config.tripCodes[user] === trip)
-			bot.send("@" + sender + " " + user + " is $\\color{lightgreen}{valid}$!");
-		else
-			bot.send("@" + sender + " " + user + " is $\\color{red}{not\\space valid}$!");
+		if(bot.config.tripCodes[name] == trip)
+		{
+			_user = name;
+			break;
+		}
 	}
+
+	if(bot.config.tripCodes[user] == trip)
+		bot.send("@" + sender + " user @" + user + " is $\\color{lightgreen}{valid}$!");
+	else if(typeof _user != 'undefined')
+		bot.send("@" + sender + " user @" + user + " usually names himself " + _user);
+	else if(typeof bot.config.tripCodes[user] != 'undefined' && bot.config.tripCodes[user] != trip)
+		bot.send("@" + sender + " user @" + user + " is $\\color{red}{not\\space valid}$!");
 	else
-	{
-		bot.send("@" + sender + " is not on the list, ask one of the admins to add " + user + " .");
-	}
+		bot.send("@" + sender + " user @" + user + " is not on the list of known user");
 }
 
 var verify = function(bot, sender, args, data)
@@ -62,7 +70,7 @@ var verify = function(bot, sender, args, data)
 		if(typeof data.trip == 'string')
 			_verify(bot, sender, data.trip, sender);
 		else
-			bot.send("@" + sender + " you do not have a TripCode,\n when logging in use [username]#[password].");
+			bot.send("@" + sender + " you do not have a TripCode, when logging in use [username]#[password].");
 	}
 	else if(args[0] == "add" && typeof args[1] != 'undefined' && typeof args[2] != 'undefined')
 	{
