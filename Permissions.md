@@ -7,7 +7,7 @@
 
 ##Level 2
 - `!ban remove <name>` removes the ban request for a certain username
-- `!botBan <name>` bans a user from usign the bot
+- `!botBan <time> <name>` bans a user from using the bot for `time` seconds (`-1` means infinite)
 - `!botUnban <name>` unbans a user from using the bot
 
 ##Level 3
