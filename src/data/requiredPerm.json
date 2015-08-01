@@ -1,1 +1,16 @@
-{"login":1,"ascii":1,"autoFilter":1,"plot":1,"channelAdd":1,"verifyAdd":1,"banRequestManage":2,"botBan":2,"botUnban":2,"add":3,"remove":3,"sudo":4,"config":5,"bot":5}
+{
+    "login": 1,
+    "ascii": 1,
+    "autoFilter": 1,
+    "plot": 1,
+    "channelAdd": 1,
+    "verifyAdd": 1,
+    "banRequestManage": 2,
+    "botBan": 2,
+    "botUnban": 2,
+    "add": 3,
+    "remove": 3,
+    "sudo": 4,
+    "config": 5,
+    "bot": 5
+}

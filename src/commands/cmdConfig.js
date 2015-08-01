@@ -38,7 +38,7 @@ var configCmd = function(bot, sender, args)
 		var name = args[1] || "undefined";
 		console.log(args.slice(2).join(" "))
 		var value = JSON.parse(args.slice(2).join(" ")) || "";
-		
+
 		var split = name.split(".");
 		var obj = bot.config;
 
@@ -87,7 +87,7 @@ var configCmd = function(bot, sender, args)
 			if(!bot.config.hasOwnProperty(key))
 				continue;
 
-			fs.writeFile("./src/data/" + key + ".json", JSON.stringify(bot.config[key]), function(err)
+			fs.writeFile("./src/data/" + key + ".json", JSON.stringify(bot.config[key], undefined, 4), function(err)
 			{
 				if(err)
 					throw err;
