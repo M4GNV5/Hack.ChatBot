@@ -40,7 +40,7 @@ var botCmd = function(bot, sender, args)
 
 		try
 		{
-			bot.send("@" + sender + " " + JSON.stringify(out));
+			bot.send(JSON.stringify(out, undefined, 2));
 		}
 		catch(e)
 		{
