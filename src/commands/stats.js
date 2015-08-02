@@ -3,7 +3,7 @@ var fs = require("fs");
 exports.init = function(bot)
 {
     var recordStats = false;
-    bot.stats = {};
+    bot.stats = require("./../stats.json");
 
     bot.on("info", function(data)
     {
