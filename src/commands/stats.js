@@ -3,7 +3,15 @@ var fs = require("fs");
 exports.init = function(bot)
 {
     var recordStats = false;
-    bot.stats = require("./../stats.json");
+
+    if(fs.existsSync('./../stats.json'))
+    {
+        bot.stats = require("./../stats.json");
+    }
+    else
+    {
+        bot.stats = {};
+    }
 
     bot.on("info", function(data)
     {
