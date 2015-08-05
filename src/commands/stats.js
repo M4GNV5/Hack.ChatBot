@@ -4,7 +4,7 @@ exports.init = function(bot)
 {
     var recordStats = false;
 
-    if(fs.existsSync('./../stats.json'))
+    if(fs.existsSync('./src/stats.json'))
     {
         bot.stats = require("./../stats.json");
     }
