@@ -61,10 +61,18 @@ function bfRun(code)
         if(char == "+")
         {
             vars[index]++;
+            if(vars[index] > 255)
+            {
+                vars[index] = 0;
+            }
         }
         else if(char == "-")
         {
             vars[index]--;
+            if(vars[index] < 0)
+            {
+                vars[index] = 255;
+            }
         }
         else if(char == ">")
         {
