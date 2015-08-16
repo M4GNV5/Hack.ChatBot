@@ -5,6 +5,11 @@ exports.reddit = function(bot, sender, args, data)
     if(sender == bot.nick)
         return;
 
+    if (args.length == 0){
+        bot.send("Usage: !reddit subreddit\nUsage: !reddit subreddit1+subreddit2");
+        return;
+    }
+
     var r = args[0] || "";
     request("http://reddit.com/r/" + r + "/.json", function(err, res, data)
     {
