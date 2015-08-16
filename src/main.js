@@ -58,8 +58,6 @@ fs.readdir("./src/commands", function(err, files)
 
 			if(typeof this.commands[cmd] == 'function' && this.commands.hasOwnProperty(cmd))
 				this.commands[cmd](this, data.nick, args, data);
-			else
-				this.send("Unknown Command: " + cmd);
 		}
 	}
 
