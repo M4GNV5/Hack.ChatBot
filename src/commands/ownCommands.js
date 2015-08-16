@@ -6,7 +6,7 @@ var init = function(bot)
 	{
 		for(var key in bot.config.ownCommands)
 		{
-			bot.commands[key] = createOwnCmdFunc(key, bot.config.ownCommands[key]);
+			bot.commands[key.toLowerCase()] = createOwnCmdFunc(key, bot.config.ownCommands[key]);
 		}
 	};
 
@@ -64,7 +64,7 @@ var addOwnCmd = function(bot, sender, args)
 	}
 	else
 	{
-		var name = args[0];
+		var name = args[0].toLowerCase();
 		var output = args.slice(1).join(" ");
 
 		bot.commands[name] = createOwnCmdFunc(name, output);

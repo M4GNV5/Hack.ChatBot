@@ -53,8 +53,9 @@ fs.readdir("./src/commands", function(err, files)
 		var msg = data.text;
 		if(msg[0] == "!")
 		{
-			var cmd = msg.substr(1).split(" ")[0];
-			var args = msg.substr(2 + cmd.length).split(" ");
+			var args = msg.substr(1).split(" ");
+			var cmd = args[0].toLowerCase();
+			var args = args.slice(1);
 
 			if(typeof this.commands[cmd] == 'function' && this.commands.hasOwnProperty(cmd))
 				this.commands[cmd](this, data.nick, args, data);
