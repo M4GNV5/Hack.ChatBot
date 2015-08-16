@@ -2,7 +2,7 @@ var onlineTripcodes = {};
 var init = function(bot)
 {
 	bot.permLevel = {};
-	bot.requirePerm = function(sender, name)
+	bot.requirePerm = function(sender, name, silent)
 	{
 		var senderLvl = bot.permLevel[sender] || 0;
 		var requiredLvl = bot.config.requiredPerm[name] || 0;
@@ -13,7 +13,8 @@ var init = function(bot)
 		}
 		else
 		{
-			bot.send("@" + sender + " you dont have the permission to use this command");
+			if(silent !== true)
+				bot.send("@" + sender + " you dont have the permission to use this command");
 			return true;
 		}
 	}
