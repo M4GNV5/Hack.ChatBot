@@ -37,6 +37,7 @@ else
 {
 	var childP = require("child_process");
 	var request = require("request");
+	var pastebin = require("pastebin");
 	var childPs = {};
 	var userContexts = {};
 
@@ -103,10 +104,27 @@ else
 			childPs[sender] = p;
 			p.on("message", function(message)
 			{
-				if(message.out.length < 200)
+				if(message.out.length < 200 && message.out.split("\n").length < 5)
+				{
 					bot.send("@" + sender + " Output: " + message.out);
+				}
+				else if(typeof bot.config.js.devKey == 'string' && bot.config.js.devKey.trim() != "")
+				{
+					var postName = "jsOutput_" + sender;
+					var expire = bot.config.js.expire || "N";
+					var _pastebin = pastebin(bot.config.js.devKey);
+					_pastebin.new({title: postName, content: message.out, expire: expire}, function (err, ret)
+					{
+						if(err)
+							bot.send("@" + sender + " Error: " + err.toString());
+						else
+							bot.send("@" + sender + " Output: " + ret);
+					});
+				}
 				else
+				{
 					bot.send("@" + sender + " Output too long! Not showing anything");
+				}
 
 				userContexts[sender] = message.context;
 
