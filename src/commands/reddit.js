@@ -5,12 +5,14 @@ exports.reddit = function(bot, sender, args, data)
     if(sender == bot.nick)
         return;
 
-    if (args.length == 0){
-        bot.send("Usage: !reddit subreddit\nUsage: !reddit subreddit1+subreddit2");
+    var r = args[0] || "";
+
+    if (r.trim() == "")
+    {
+        bot.send("Usage: !reddit <subreddit>");
         return;
     }
 
-    var r = args[0] || "";
     request("http://reddit.com/r/" + r + "/.json", function(err, res, data)
     {
         if(err)
@@ -20,6 +22,12 @@ exports.reddit = function(bot, sender, args, data)
         }
 
         var data = JSON.parse(data);
+        if(typeof data.data == 'undefined' || typeof data.data.children == 'undefined')
+        {
+            bot.send("Error retrieving data! Usage: !reddit <subreddit>");
+            return;
+        }
+
         var posts = data.data.children;
         var out = [];
 
