@@ -6,7 +6,7 @@ var init = function(bot)
 	{
 		for(var key in bot.config.ownCommands)
 		{
-			bot.commands[key] = createOwnCmdFunc(bot.config.ownCommands[key]);
+			bot.commands[key] = createOwnCmdFunc(key, bot.config.ownCommands[key]);
 		}
 	};
 
@@ -20,7 +20,7 @@ var init = function(bot)
 	}
 };
 
-var createOwnCmdFunc = function(output)
+var createOwnCmdFunc = function(cmd, output)
 {
 	return function(bot, sender, args)
 	{
@@ -39,8 +39,15 @@ var createOwnCmdFunc = function(output)
 
 		for(var i = 0; i < args.length; i++)
 		{
-			replace("%" + i + "%", args[i]);
+			if(args[i].trim() != "")
+				replace("%" + i + "%", args[i]);
 		}
+		if(/%[0-9]+%/g.test(_output))
+		{
+			bot.send("@" + sender + " not enough arguments!");
+			return;
+		}
+
 
 		bot.send(_output);
 	};
@@ -60,7 +67,7 @@ var addOwnCmd = function(bot, sender, args)
 		var name = args[0];
 		var output = args.slice(1).join(" ");
 
-		bot.commands[name] = createOwnCmdFunc(output);
+		bot.commands[name] = createOwnCmdFunc(name, output);
 		bot.config.ownCommands[name] = output;
 
 		bot.send("@" + sender + " added command " + name);
