@@ -6,7 +6,7 @@ exports.reddit = function(bot, sender, args, data)
         return;
 
     if (args.length == 0){
-        return;
+        bot.send("Usage: !reddit subreddit\nUsage: !reddit subreddit1+subreddit2");
     }
 
     var r = args[0] || "";
