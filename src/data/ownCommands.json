@@ -8,11 +8,12 @@
     "coffee": "@%sender% gives a hot cup of coffee to @%0%",
     "java": "    _                 ___  \n   (_) __ ___   ____ |__ \\ \n   | |/ _` \\ \\ / / _` |/ / \n   | | (_| |\\ V / (_| |_|  \n  _/ |\\__,_| \\_/ \\__,_(_)  \n |__/__ _____ _____ ___  _ \n  / ___|_   _|  ___/ _ \\| |\n | |  _  | | | |_ | | | | |\n | |_| | | | |  _|| |_| |_|\n  \\____| |_| |_|   \\___/(_)",
     "learnToCode": "http://www.codecademy.com/\nhttps://www.codingame.com/\nhttps://www.hackerrank.com\nhttp://codecombat.com/\nhttps://code.org/",
-    "portage": "vortico: \"It's literally the most unintuitive package manager out ther\" - 2015",
     "apple": "     ,--./,-.\n    /,-._.--~\\\n     __}  {\n    \\`-._,-`-,\n     `._,._,'   hjw",
     "slap": "@%sender% slaps @%0% around a bit with a large trout ",
     "girlfriend": "@%sender% is lonely and looking for a girlfriend",
     "boyfriend": "@%sender% is lonely and looking for a boyfriend",
     "admin": "Site admin: vortico\nSite mods: bacon, Shrooms, ToastyStoemp, M4GNV5\nBot admins: M4GNV5, Serials, ToastyStoemp",
-    "DEUTSCH": "manchmal hängen ein paar unserer Sippe in ?de ;)"
+    "DEUTSCH": "manchmal hängen ein paar unserer Sippe in ?de ;)",
+    "welpGfIsPregnant": "\"Imma abort that little shit my self with my baseball bat\" - @ToastyStoemp 2015",
+    "rules": "Hack.Chat rules:\n- No spamming\n- No impersonating admins\n- No illegal content"
 }
