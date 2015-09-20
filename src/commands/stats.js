@@ -19,13 +19,14 @@ exports.init = function(bot)
         if(split[1] != "unique" || split[2] != "IPs" || split[3] != "in" || split[5] != "channels")
             return;
 
+        var ips = parseInt(split[0]);
+        var channel = parseInt(split[4]);
+
         if(recordStats)
         {
             recordStats = false;
 
             var time = new Date().getTime().toString();
-            var ips = parseInt(split[0]);
-            var channel = parseInt(split[4]);
 
             bot.stats[time.toString()] = {ips: ips, channel: channel};
 
@@ -33,7 +34,8 @@ exports.init = function(bot)
         }
         else
         {
-            bot.send(data.text);
+            var average = Math.round(ips / channel * 100) / 100;
+            bot.send(data.text + " - " + average + " per channel");
         }
     });
 
