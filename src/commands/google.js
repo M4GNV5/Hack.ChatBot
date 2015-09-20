@@ -6,8 +6,8 @@ var googleCallback = function(bot, sender, args)
 	var search = args.join(" ");
 
 	google(search, function(err, next, links)
-		   {
-		if(err) 
+	{
+		if(err)
 		{
 			bot.send("Error processing google search: " + err);
 			return;
@@ -22,7 +22,7 @@ var googleCallback = function(bot, sender, args)
 		var result = [];
 
 		var max = 3;
-		for(var i = 0; i < links.length && i < max; i++) 
+		for(var i = 0; i < links.length && i < max; i++)
 		{
 			if(typeof links[i].href == 'undefined' || !links[i].href)
 			{
@@ -36,7 +36,7 @@ var googleCallback = function(bot, sender, args)
 	});
 };
 
-module.exports = 
+module.exports =
 {
 	g: googleCallback,
 	google: googleCallback
