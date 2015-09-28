@@ -1,38 +1,37 @@
-var google = require("google");
-google.resultsPerPage = 5;
+var google = require('googleapis');
+var customsearch = google.customsearch('v1');
 
 var googleCallback = function(bot, sender, args)
 {
-	var search = args.join(" ");
+	var search = args.join(" ").trim();
 
-	google(search, function(err, next, links)
+	if(search == "")
+		return bot.send("Syntax is !google [Search term]");
+
+	var apikey = bot.config.google.apiKey;
+	var cx = bot.config.google.customsearchId;
+
+	customsearch.cse.list({ cx: cx, q: search, auth: apikey }, function(err, resp)
 	{
-		if(err)
-		{
-			bot.send("Error processing google search: " + err);
-			return;
-		}
+		if (err)
+			return bot.send(err.toString());
 
-		if(links.length == 0)
+		require("fs").writeFileSync("dump.json", JSON.stringify(resp, undefined, 4));
+		if (resp.items && resp.items.length > 0)
 		{
-			bot.send("Syntax is !google [Search term]");
-			return;
-		}
+			var result = [];
 
-		var result = [];
-
-		var max = 3;
-		for(var i = 0; i < links.length && i < max; i++)
-		{
-			if(typeof links[i].href == 'undefined' || !links[i].href)
+			for(var i = 0; i < resp.items.length && i < 3; i++)
 			{
-				max++;
-				continue;
+				result.push(resp.items[i].title + " - " + resp.items[i].link);
 			}
-			result.push(links[i].title + " - " + links[i].href);
-		}
 
-		bot.send(result.join("\n"));
+			bot.send(result.join("\n"));
+		}
+		else
+		{
+			bot.send("No reults found! Syntax is !google [Search term]");
+		}
 	});
 };
 
