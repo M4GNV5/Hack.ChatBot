@@ -104,13 +104,13 @@ else
 			childPs[sender] = p;
 			p.on("message", function(message)
 			{
-				if(message.out.length < 200 && message.out.split("\n").length < 5)
+				if(message.out.length < 500 && message.out.split("\n").length < 5)
 				{
 					bot.send("@" + sender + " Output: " + message.out);
 				}
 				else if(typeof bot.config.js.devKey == 'string' && bot.config.js.devKey.trim() != "")
 				{
-					var postName = "jsOutput_" + sender;
+					var postName = sender + "'s !js output";
 					var expire = bot.config.js.expire || "N";
 					var _pastebin = pastebin(bot.config.js.devKey);
 					_pastebin.new({title: postName, content: message.out, expire: expire}, function (err, ret)
