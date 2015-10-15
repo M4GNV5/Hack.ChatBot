@@ -6,8 +6,7 @@ var config = require("./config.json");
 
 fs.readdir("./src/commands", function(err, files)
 {
-	if(err)
-		throw err;
+	if(err) throw err;
 
 	var bot = new ChatConnection(config.url, config.nick, config.channel);
 
@@ -44,10 +43,15 @@ fs.readdir("./src/commands", function(err, files)
 	{
 		console.log(data.nick + ": " + data.text);
 
+		var lowerCaseNick = data.nick.toLowerCase();
+
 		if(data.nick == config.nick)
 			return;
 
-		if(this.bans.indexOf(data.nick.toLowerCase()) !== -1)
+		if(lowerCaseNick.substr(-3) == 'bot') // Don't reply to bots
+			return;
+
+		if(this.bans.indexOf(lowerCaseNick) !== -1)
 			return;
 
 		var msg = data.text;
@@ -57,7 +61,7 @@ fs.readdir("./src/commands", function(err, files)
 			var cmd = args[0].toLowerCase();
 			var args = args.slice(1);
 
-			if(typeof this.commands[cmd] == 'function' && this.commands.hasOwnProperty(cmd))
+			if(this.commands[cmd] instanceof Function && this.commands.hasOwnProperty(cmd))
 				this.commands[cmd](this, data.nick, args, data);
 		}
 	}
