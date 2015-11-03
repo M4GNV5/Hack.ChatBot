@@ -5,7 +5,7 @@ var util = require('util');
 function ChatConnection(url, nick, channel)
 {
 	this.url = url;
-	this.nick = nick;
+	this.nick = nick.split("#")[0];
 	this.channel = channel;
 
 	events.EventEmitter.call(this);

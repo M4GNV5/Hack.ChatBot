@@ -44,7 +44,7 @@ fs.readdir("./src/commands", function(err, files)
 	{
 		console.log(data.nick + ": " + data.text);
 
-		if(data.nick == config.nick)
+		if(data.nick == bot.nick)
 			return;
 
 		if(this.bans.indexOf(data.nick.toLowerCase()) !== -1)
