@@ -41,6 +41,8 @@ function bfInterpreter(bot, sender, args, data)
 
 function createErrorMessage(message, code, index)
 {
+    code = "   " + code + "   ";
+    index += 3;
     return message + "\n" + code.substr(index - 3, 7) + " char " + index + "\n   ^   ";
 
 }
@@ -97,6 +99,12 @@ function bfRun(code)
         }
         else if(char == "]")
         {
+            if(!loops[0])
+            {
+                var message = "Error: unbalanced brackets";
+                return {output: message, variables: vars, index: index, error: i};
+            }
+
             if(vars[index] == 0)
             {
                 loops.splice(0, 1);
