@@ -51,7 +51,7 @@ fs.readdir("./src/commands", function(err, files)
 			return;
 
 		var msg = data.text;
-		if(msg[0] == "!")
+		if(msg[0] == config.cmdPrefix)
 		{
 			var args = msg.substr(1).split(" ");
 			var cmd = args[0].toLowerCase();
