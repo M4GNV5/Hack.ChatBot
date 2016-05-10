@@ -82,18 +82,39 @@ var configCmd = function(bot, sender, args)
 	}
 	else if(args[0] == "save")
 	{
-		for(var key in bot.config)
-		{
-			if(!bot.config.hasOwnProperty(key))
-				continue;
-
-			fs.writeFile("./src/data/" + key + ".json", JSON.stringify(bot.config[key], undefined, 4), function(err)
-			{
-				if(err)
-					throw err;
-			});
-		}
+		saveFiles(bot, sender);
 	}
 }
 
-module.exports = { init: init, config: configCmd };
+var lastFgtSave = 0;
+var fgtSave = function(bot, sender, args)
+{
+	if(bot.requirePerm(sender, "fgtSave"))
+		return;
+
+	var now = Date.now();
+	if(now - lastFgtSave < 60 * 60 * 1000)
+		bot.send("@" + sender + " You are a faggot. Try again in 1 hour");
+	else
+		saveFiles(bot, sender);
+
+	lastFgtSave = now;
+}
+
+function saveFiles(bot, sender)
+{
+	bot.send("@" + sender + " Saving configs...");
+	for(var key in bot.config)
+	{
+		if(!bot.config.hasOwnProperty(key))
+			continue;
+
+		fs.writeFile("./src/data/" + key + ".json", JSON.stringify(bot.config[key], undefined, 4), function(err)
+		{
+			if(err)
+				throw err;
+		});
+	}
+}
+
+module.exports = { init: init, config: configCmd, fgtsave: fgtSave };

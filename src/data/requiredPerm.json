@@ -10,6 +10,7 @@
     "banRequestManage": 2,
     "botBan": 2,
     "botUnban": 2,
+    "fgtSave": 2,
     "add": 3,
     "remove": 3,
     "sudo": 4,
