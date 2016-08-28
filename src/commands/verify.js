@@ -61,7 +61,7 @@ var _verify = function(bot, sender, trip, user)
 	else if(typeof bot.config.tripCodes[user] != 'undefined' && bot.config.tripCodes[user] != trip)
 		bot.send("@" + sender + " user @" + user + " is $\\color{red}{not\\space valid}$!");
 	else
-		bot.send("@" + sender + " user @" + user + " is not on the list of known user");
+		bot.send("@" + sender + " user @" + user + " is not on the list of known users");
 }
 
 var verify = function(bot, sender, args, data)
