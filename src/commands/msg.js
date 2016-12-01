@@ -31,6 +31,9 @@ exports.init = function(bot)
 
 exports.msg = function(bot, sender, args)
 {
+	if(args.length < 2)
+		return bot.send("@" + sender + " usage: !msg <nick> <message ...>");
+
 	var target = args[0];
 	if(target[0] == "@")
 		target = target.substr(1);
