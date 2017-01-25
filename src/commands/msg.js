@@ -1,5 +1,23 @@
 var messages = {};
 
+function formatTimeDiff(time)
+{
+	var diff = (Date.now() - time) / 1000;
+	if(diff < 60 * 2)
+		return Math.floor(diff) + "s ago";
+
+	diff /= 60;
+	if(diff < 120)
+		return Math.floor(diff) + "m ago";
+
+	diff /= 60;
+	if(diff < 120)
+		return Math.floor(diff) + "h ago";
+
+	diff /= 24;
+	return Math.floor(diff) + "d ago";
+}
+
 exports.init = function(bot)
 {
 	bot.on("chat", function(data)
@@ -15,13 +33,7 @@ exports.init = function(bot)
 			var now = new Date();
 			entries.forEach(function(msg)
 			{
-				var time = new Date(msg.time);
-				if(now.getDate() != time.getDate() || now.getMonth() != time.getMonth())
-					text += "[" + time.toLocaleString() + "]";
-				else
-					text += "[" + time.toLocaleTimeString() + "]";
-
-				text += " " + msg.sender + " : " + msg.message + "\n";
+				text += "[" + formatTimeDiff(msg.time) + "] " + msg.sender + " : " + msg.message + "\n";
 			});
 
 			bot.send(text);
