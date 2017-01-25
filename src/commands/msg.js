@@ -4,7 +4,7 @@ exports.init = function(bot)
 {
 	bot.on("chat", function(data)
 	{
-		if(messages[data.nick])
+		if(messages.hasOwnProperty(data.nick))
 		{
 			var entries = messages[data.nick];
 			delete messages[data.nick];
