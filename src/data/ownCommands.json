@@ -1,19 +1,224 @@
 {
-    "source": "https://github.com/M4GNV5/Hack.ChatBot",
-    "beard": "           _,,,,_\n         ,########, \n        ,##`    `##,\n        ## ##  ## ##\n        /# (.)(.) #\\\n        \\#   _)   #/\n         #,######,#\n         ##, ~~ ,##\n         '########'\n          `######`",
-    "nsfw": "                        .-\"\"-.                                        \n                       (___/\\ \\ \n                      ( |' ' ) )  \n                    __) _\\=_/  (     \n               ____(__.' `  \\   )       \n             .(/\"-.._.('     ; (                                      \n            /   / .     (' , |  )                                     \n _.`'---.._/   /.__ ____.'_| |_/                                      \n'-'``'-._     /  | `-........'                                        \n   jgs   `;-\"`;  |                                                    \n           `'.__/                                                     ",
-    "timezones": "https://gist.github.com/M4GNV5/efe1ab2e3370f09a2cce",
-    "about": "$\\Large\\text{hack.chat bot by M4GNV5}$\ncurrently called %self% in channel ?%channel%\ntype !help for a list of commands",
-    "metaq": "Don't ask to ask, just ask your question - http://bit.ly/1UV6e0B",
-    "coffee": "@%sender% gives a hot cup of coffee to @%0%",
-    "java": "    _                 ___  \n   (_) __ ___   ____ |__ \\ \n   | |/ _` \\ \\ / / _` |/ / \n   | | (_| |\\ V / (_| |_|  \n  _/ |\\__,_| \\_/ \\__,_(_)  \n |__/__ _____ _____ ___  _ \n  / ___|_   _|  ___/ _ \\| |\n | |  _  | | | |_ | | | | |\n | |_| | | | |  _|| |_| |_|\n  \\____| |_| |_|   \\___/(_)",
-    "learnToCode": "http://www.codecademy.com/\nhttps://www.codingame.com/\nhttps://www.hackerrank.com\nhttp://codecombat.com/\nhttps://code.org/",
-    "apple": "     ,--./,-.\n    /,-._.--~\\\n     __}  {\n    \\`-._,-`-,\n     `._,._,'   hjw",
-    "slap": "@%sender% slaps @%0% around a bit with a large trout ",
-    "girlfriend": "@%sender% is lonely and looking for a girlfriend",
-    "boyfriend": "@%sender% is lonely and looking for a boyfriend",
-    "admin": "Site admin: vortico\nSite mods: bacon, Shrooms, ToastyStoemp, M4GNV5\nBot admins: M4GNV5, Serials, ToastyStoemp",
-    "DEUTSCH": "manchmal hängen ein paar unserer Sippe in ?de ;)",
-    "welpGfIsPregnant": "\"Imma abort that little shit my self with my baseball bat\" - @ToastyStoemp 2015",
-    "rules": "Hack.Chat rules:\n- No spamming\n- No impersonating admins\n- No illegal content"
+    "source": {
+        "name": "source",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "https://github.com/M4GNV5/Hack.ChatBot",
+        "created": 0,
+        "edited": 0
+    },
+    "beard": {
+        "name": "beard",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "           _,,,,_\n         ,########, \n        ,##`    `##,\n        ## ##  ## ##\n        /# (.)(.) #\\\n        \\#   _)   #/\n         #,######,#\n         ##, ~~ ,##\n         '########'\n          `######`",
+        "created": 0,
+        "edited": 0
+    },
+    "nsfw": {
+        "name": "nsfw",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "                        .-\"\"-.                                        \n                       (___/\\ \\ \n                      ( |' ' ) )  \n                    __) _\\=_/  (     \n               ____(__.' `  \\   )       \n             .(/\"-.._.('     ; (                                      \n            /   / .     (' , |  )                                     \n _.`'---.._/   /.__ ____.'_| |_/                                      \n'-'``'-._     /  | `-........'                                        \n   jgs   `;-\"`;  |                                                    \n           `'.__/                                                     ",
+        "created": 0,
+        "edited": 0
+    },
+    "timezones": {
+        "name": "timezones",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "https://gist.github.com/M4GNV5/efe1ab2e3370f09a2cce",
+        "created": 0,
+        "edited": 0
+    },
+    "about": {
+        "name": "about",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "$\\Large\\text{hack.chat bot by M4GNV5}$\ncurrently called %self% in channel ?%channel%\ntype !help for a list of commands",
+        "created": 0,
+        "edited": 0
+    },
+    "coffee": {
+        "name": "coffee",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "@%sender% gives a hot cup of coffee to @%0%",
+        "created": 0,
+        "edited": 1492704965467,
+        "usage": "!coffee <user>"
+    },
+    "java": {
+        "name": "java",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "    _                 ___  \n   (_) __ ___   ____ |__ \\ \n   | |/ _` \\ \\ / / _` |/ / \n   | | (_| |\\ V / (_| |_|  \n  _/ |\\__,_| \\_/ \\__,_(_)  \n |__/__ _____ _____ ___  _ \n  / ___|_   _|  ___/ _ \\| |\n | |  _  | | | |_ | | | | |\n | |_| | | | |  _|| |_| |_|\n  \\____| |_| |_|   \\___/(_)",
+        "created": 0,
+        "edited": 0
+    },
+    "learntocode": {
+        "name": "learntocode",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "http://www.codecademy.com/\nhttps://www.codingame.com/\nhttps://www.hackerrank.com\nhttp://codecombat.com/\nhttps://code.org/",
+        "created": 0,
+        "edited": 0
+    },
+    "apple": {
+        "name": "apple",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "     ,--./,-.\n    /,-._.--~\\\n     __}  {\n    \\`-._,-`-,\n     `._,._,'   hjw",
+        "created": 0,
+        "edited": 0
+    },
+    "slap": {
+        "name": "slap",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "@%sender% slaps @%0% around a bit with a large trout",
+        "created": 0,
+        "edited": 1492705000705,
+        "usage": "!slap <user>"
+    },
+    "girlfriend": {
+        "name": "girlfriend",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "@%sender% is lonely and looking for a girlfriend",
+        "created": 0,
+        "edited": 0
+    },
+    "boyfriend": {
+        "name": "boyfriend",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "@%sender% is lonely and looking for a boyfriend",
+        "created": 0,
+        "edited": 0
+    },
+    "admin": {
+        "name": "admin",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "Site admin: vortico\nSite mods: bacon, Shrooms, ToastyStoemp, M4GNV5\nBot admins: M4GNV5, Serials, ToastyStoemp",
+        "created": 0,
+        "edited": 0
+    },
+    "welpgfispregnant": {
+        "name": "welpgfispregnant",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "@%sender% is lonely and looking for a girlfriend",
+        "created": 0,
+        "edited": 0
+    },
+    "rules": {
+        "name": "rules",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "@%sender% is lonely and looking for a girlfriend",
+        "created": 0,
+        "edited": 0
+    },
+    "coask": {
+        "name": "coask",
+        "type": "text",
+        "author": {
+            "trip": "licFKi",
+            "nick": "JQuery"
+        },
+        "text": "COalition Against Script Kiddies",
+        "created": 0,
+        "edited": 0
+    },
+    "sepples": {
+        "name": "sepples",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "A horrible object-oriented programming language that has unfortunately become one of the most used of all. Full of horrible syntax and complicated and confusing rules, Sepples is the scourge of programming languages. \nPeople who use Sepples typically refer to it as C++ - http://bit.ly/2dJHOrn",
+        "created": 0,
+        "edited": 0
+    },
+    "c++": {
+        "name": "c++",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "Linus Torvalds: \"C++ is a horrible language. It’s made more horrible by the fact that a lot of substandard programmers use it, to the point where it’s much much easier to generate total and utter crap with it.\" - http://bit.ly/2dniQwA",
+        "created": 0,
+        "edited": 0
+    },
+    "alien": {
+        "name": "alien",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "      __.,,------.._\n     ,'\"   _      _   \"`.\n    /.__, ._  -=- _\"`    Y\n   (.____.-.`      \"\"`   j\n    VvvvvvV`.Y,.    _.,-'       ,     ,     ,\n        Y    ||,   '\"\\         ,/    ,/    ./\n        |   ,'  ,     `-..,'_,'/___,'/   ,'/   ,\n   ..  ,;,,',-'\"\\,'  ,  .     '     ' \"\"' '--,/    .. ..\n ,'. `.`---'     `, /  , Y -=-    ,'   ,   ,. .`-..||_|| ..\nff\\\\`. `._        /f ,'j j , ,' ,   , f ,  \\=\\ Y   || ||`||_..\nl` \\` `.`.\"`-..,-' j  /./ /, , / , / /l \\   \\=\\l   || `' || ||...\n `  `   `-._ `-.,-/ ,' /`\"/-/-/-/-\"'''\"`.`.  `'.\\--`'--..`'_`' || ,\n            \"`-_,',  ,'  f    ,   /      `._    ``._     ,  `-.`'//         ,\n          ,-\"'' _.,-'    l_,-'_,,'          \"`-._ . \"`. /|     `.'\\ ,       |\n        ,',.,-'\"          \\=) ,`-.         ,    `-'._`.V |       \\ // .. . /j\n        |f\\\\               `._ )-.\"`.     /|         `.| |        `.`-||-\\\\/\n        l` \\`                 \"`._   \"`--' j          j' j          `-`---'\n         `  `                     \"`_,-','/       ,-'\"  /\n                                 ,'\",__,-'       /,, ,-'\n                                 Vvv'            VVv'",
+        "created": 0,
+        "edited": 0
+    },
+    "nsfw2": {
+        "name": "nsfw2",
+        "type": "text",
+        "author": {
+            "trip": "cronuS",
+            "nick": "M4GNV5"
+        },
+        "text": "                      ..   ___\n                    /'  `\\/   `.\n              .   .'      :  `. `.\n              \\\\.'        ,  `.`  `.\n              `.     ,___/|\\. `.   :\n             . \\, .'./    ' '\\  ,  '\n             .\\    .  \\_.~ _; ;    \\/'.\n             `\\ ..._`.   :   /..   ../\n              /' _._  \\. ~ .'   `\\:\n            /'.'@   `    .---.    `.\n          .'  :         '   @ `.\\.  \\\n         /   ./`.._./ ~ .      :\\    `.   __\n       .'   /   (        \\....'  `.  .' /'  `.\n  /'''\\   .'    `.  /  \\     :     ;' .'    ..:\n.' ;   `\\;       : :    :    :   .'   :  ;    :\n:     `\\. `\\.    ;   :        \\.'     \"  '    ;\n `.      `.   \\ /    s    .   /       `.     .'\n  `    .   `.  `\\ `.     ;  /'         ;___ ;\n   `.   `.  `.   `         ;          ;:__..'\n     `.   `. `.     :` ':    _.'    .' ;   :\n       `.     `.    .\\x./-`--...../'   ;   :\n         `. ..-:..-'                  (    :\n           `---'`.                     `;   :\n             `.  `,..                   :    :\n               `.    `.                  `.___;\n                 `.    `.\n                   `.    `;\n                     `-.,'",
+        "created": 0,
+        "edited": 0
+    }
 }
