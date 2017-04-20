@@ -1,6 +1,5 @@
 ## Level 1
 - `!command set-text|delete|usage|info <cmd> <text ...>` sets/queries custom commands
->>>>>>> e7b1e98... fix markdown headers
 - `!ascii <text>` converts text to ascii art and prints result to chat
 - `!autoFilter <word>` adds words that get ignored in auto commands
 - `!plot <...function>` plot the function of a graph in ascii "art"
@@ -13,8 +12,7 @@
 - `!botUnban <name>` unbans a user from using the bot
 
 ## Level 3
-- `!add <name> <text>` adds a command that returns specified text
-- `!remove <name>` removes a command
+Allows using `!command` on other peoples commands.
 
 ## Level 4
 - `!sudo <user> !<command> <...args>` runs a command as the specified user

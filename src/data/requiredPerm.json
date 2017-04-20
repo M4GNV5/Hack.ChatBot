@@ -1,4 +1,5 @@
 {
+	"command": 0,
     "login": 1,
     "ascii": 1,
     "autoFilter": 1,
@@ -11,8 +12,7 @@
     "botBan": 2,
     "botUnban": 2,
     "fgtSave": 2,
-    "add": 3,
-    "remove": 3,
+    "command-admin": 3,
     "sudo": 4,
     "config": 5,
     "bot": 5
