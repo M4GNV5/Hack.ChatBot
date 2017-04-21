@@ -1,3 +1,6 @@
+var request = require("request");
+var runCode = require("../jsvm.js");
+
 function createCommand(cmd)
 {
 	return function(bot, sender, args)
@@ -27,6 +30,36 @@ function createCommand(cmd)
 				bot.send(text);
 				return;
 			}
+		}
+		else if(cmd.type == "js")
+		{
+			var ctx = cmd.context || {};
+			ctx.command = cmd.name;
+			ctx.sender = sender;
+			ctx.channel = bot.channel;
+			ctx.nick = bot.nick;
+			ctx.args = args;
+
+			runCode(cmd.text, ctx, function(err, out, ctx)
+			{
+				if(out.length > 500 || out.split("\n").length > 5)
+					out = out.substring(0, out.indexOf("\n")).substr(0, 497) + "...";
+
+				if(cmd.usage && err)
+				{
+
+				}
+				else if(JSON.stringify(ctx).length < 10 * 1024 * 1024)
+				{
+					cmd.context = ctx;
+					bot.send("@" + sender + " " + out);
+				}
+				else
+				{
+					bot.send("@" + sender + " context of !" + cmd.name + " is too big");
+				}
+			});
+			return;
 		}
 		else
 		{
@@ -63,7 +96,7 @@ exports.command = function(bot, sender, args, data)
 		return;
 
 	if(args.length < 2)
-		return bot.send("@" + sender + " Usage: !command set-text|delete|usage|info <cmd> <text ...>");
+		return bot.send("@" + sender + " Usage: !command set-text|set-js|set-pastebin|delete|usage|info <cmd> <text ...>");
 
 	var name = args[1].toLowerCase();
 	var text = args.slice(2).join(" ");
@@ -87,6 +120,28 @@ exports.command = function(bot, sender, args, data)
 		}
 
 		return commands;
+	}
+	function setCommand(type, text)
+	{
+		if(!cmd)
+		{
+			cmd = bot.config.ownCommands[name] = {
+				name: name,
+				type: type,
+				author: {trip: data.trip, nick: sender},
+				text: text,
+				created: Date.now(),
+				edited: Date.now()
+			};
+
+			bot.commands[name] = createCommand(cmd);
+		}
+		else
+		{
+			cmd.type = type;
+			cmd.text = text;
+			cmd.edited = Date.now();
+		}
 	}
 	function checkUserPerm(isCreate)
 	{
@@ -114,21 +169,36 @@ exports.command = function(bot, sender, args, data)
 			if(!checkUserPerm(true))
 				return;
 
-			bot.config.ownCommands[name] = {
-				name: name,
-				type: "text",
-				author: {trip: data.trip, nick: sender},
-				text: text,
-				created: Date.now(),
-				edited: Date.now()
-			};
-			bot.commands[name] = createCommand(bot.config.ownCommands[name]);
+			setCommand("text", text);
+			bot.send("@" + sender + " set command " + name);
+			break;
 
+		case "set-js":
+			if(bot.requirePerm("command-js") || !checkUserPerm(true))
+				return;
+
+			setCommand("js", text);
 			bot.send("@" + sender + " set command " + name);
 			break;
 
 
-		//TODO set-pastebin
+		case "set-pastebin":
+			if(bot.requirePerm("command-js") || !checkUserPerm(true))
+				return;
+
+			request("http://pastebin.com/raw.php?i=" + text, function(err, res, code)
+			{
+				if(err)
+				{
+					bot.send("@" + sender + " " + err.toString());
+				}
+				else
+				{
+					setCommand("js", code);
+					bot.send("@" + sender + " set command " + name);
+				}
+			});
+			break;
 
 
 		case "delete":
@@ -147,6 +217,8 @@ exports.command = function(bot, sender, args, data)
 				return;
 			cmd.usage = text;
 			cmd.edited = Date.now();
+
+			bot.send("@" + sender + " set command usage");
 			break;
 
 
@@ -167,5 +239,6 @@ exports.command = function(bot, sender, args, data)
 				msg += "\nUsage: " + cmd.usage;
 
 			bot.send(msg);
+			break;
 	}
 };

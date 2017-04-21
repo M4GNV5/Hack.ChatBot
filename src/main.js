@@ -32,10 +32,8 @@ fs.readdir("./src/commands", function(err, files)
 
 			for(var key in cmds)
 			{
-				if(typeof cmds[key] != 'function')
-					throw "Invalid command " + files[i];
-
-				bot.commands[key] = cmds[key];
+				if(typeof cmds[key] == 'function')
+					bot.commands[key] = cmds[key];
 			}
 		}
 	}
@@ -64,7 +62,14 @@ fs.readdir("./src/commands", function(err, files)
 
 	bot.on("chat", function(data)
 	{
-		bot.parseCmd(data);
+		try
+		{
+			bot.parseCmd(data);
+		}
+		catch(e)
+		{
+			console.error(e);
+		}
 	});
 
 	bot.on("info", function (data)
@@ -73,6 +78,13 @@ fs.readdir("./src/commands", function(err, files)
 	});
 
 	bot.on("warn", function (data) {
+		if(data.text == "Nickname taken")
+		{
+			var nick = Math.random().toString(36).substring(3, 7) + "_" + config.nick;
+			bot.nick = nick.split("#")[0];
+			bot.ws.send(JSON.stringify({cmd: "join", nick: nick, channel: config.channel}));
+		}
+
 		console.log("WARN : " + data.text);
 	});
 });
