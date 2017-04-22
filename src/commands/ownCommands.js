@@ -230,6 +230,18 @@ exports.command = function(bot, sender, args, data)
 			break;
 
 
+		case "list":
+			var list = commandsBy(args[1]);
+			for(var i = 0; i < list.length; i++)
+				list[i] = "!" + list[i].name;
+
+			if(list.length == 0)
+				list.push("-");
+
+			bot.send("@" + sender + " Commands by " + args[1] + ": " + list.join(", "));
+			break;
+
+
 		case "info":
 			if(!checkUserPerm())
 				return;
