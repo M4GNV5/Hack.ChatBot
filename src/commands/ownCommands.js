@@ -42,12 +42,17 @@ function createCommand(cmd)
 
 			runCode(cmd.text, ctx, function(err, out, ctx)
 			{
-				if(out.length > 500 || out.split("\n").length > 5)
+				if(err && !out)
+					return bot.send("@" + sender + " " + err);
+
+				if(out.split("\n").length > 5)
 					out = out.substring(0, out.indexOf("\n")).substr(0, 497) + "...";
+				else if(out.length > 500)
+					out = out.substr(0, 497) + "...";
 
 				if(cmd.usage && err)
 				{
-
+						bot.send("@" + sender + " " + cmd.usage);
 				}
 				else if(JSON.stringify(ctx).length < 10 * 1024 * 1024)
 				{
@@ -100,6 +105,9 @@ exports.command = function(bot, sender, args, data)
 
 	var name = args[1].toLowerCase();
 	var text = args.slice(2).join(" ");
+
+	if(!/^\w+$/.test(name))
+		return bot.send("@" + sender + " Commands should not have special characters");
 
 	var cmd;
 	if(bot.config.ownCommands.hasOwnProperty(name))
@@ -229,11 +237,6 @@ exports.command = function(bot, sender, args, data)
 			var msg = "Info for command !" + name +
 				"\nAuthor: [" + cmd.author.trip + "] " + cmd.author.nick +
 				"\nType: " + cmd.type;
-
-			if(cmd.type == "pastebin")
-				msg += "\nUrl: https://pastebin.com/" + cmd.url;
-			else if(cmd.type == "text")
-				msg += "\nText: " + cmd.text.split("\n")[0].substr(0, 80);
 
 			if(cmd.usage)
 				msg += "\nUsage: " + cmd.usage;

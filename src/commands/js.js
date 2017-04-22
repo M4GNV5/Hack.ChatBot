@@ -61,8 +61,13 @@ exports.js = function(bot, sender, args)
 
 		runCode(code, ctx, function(err, out, ctx)
 		{
-			if(out.length > 500 || out.split("\n").length > 5)
+			if(err && !out)
+				return bot.send("@" + sender + " " + err);
+
+			if(out.split("\n").length > 5)
 				out = out.substring(0, out.indexOf("\n")).substr(0, 497) + "...";
+			else if(out.length > 500)
+				out = out.substr(0, 497) + "...";
 
 			if(JSON.stringify(ctx).length < 10 * 1024 * 1024)
 			{

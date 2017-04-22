@@ -50,7 +50,7 @@ else
 		{
 			p.kill();
 			if(!pFinished)
-				bot.send("@" + sender + " terminated! Execution took too long");
+				cb("terminated! Execution took too long", undefined, context);
 		}, timeout);
 	};
 }
