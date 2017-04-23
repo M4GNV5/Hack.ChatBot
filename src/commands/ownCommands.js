@@ -182,7 +182,7 @@ exports.command = function(bot, sender, args, data)
 			break;
 
 		case "set-js":
-			if(bot.requirePerm("command-js") || !checkUserPerm(true))
+			if(bot.requirePerm(sender, "command-js") || !checkUserPerm(true))
 				return;
 
 			setCommand("js", text);
@@ -191,7 +191,7 @@ exports.command = function(bot, sender, args, data)
 
 
 		case "set-pastebin":
-			if(bot.requirePerm("command-js") || !checkUserPerm(true))
+			if(bot.requirePerm(sender, "command-js") || !checkUserPerm(true))
 				return;
 
 			request("http://pastebin.com/raw.php?i=" + text, function(err, res, code)
