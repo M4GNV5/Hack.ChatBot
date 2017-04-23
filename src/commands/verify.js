@@ -21,13 +21,14 @@ var init = function(bot)
 
 	bot.on("chat", function(data)
 	{
-		if(typeof data.trip != 'undefined')
+		if(typeof data.trip != 'undefined' && !onlineTripcodes[data.nick])
 		{
 			onlineTripcodes[data.nick] = data.trip;
+
 			if(typeof bot.config.users[data.trip] != 'undefined')
-			{
 				bot.permLevel[data.nick] = bot.config.users[data.trip];
-			}
+			else if(bot.config.tripCodes[data.nick] == data.trip)
+				bot.permLevel[data.nick] = bot.config.users["*verified"];
 		}
 	});
 	bot.on("onlineRemove", function(data)

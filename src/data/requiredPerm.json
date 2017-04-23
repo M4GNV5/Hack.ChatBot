@@ -1,12 +1,11 @@
 {
     "command": 0,
-    "login": 1,
+	"command-js": 1,
     "ascii": 1,
     "autoFilter": 1,
     "plot": 1,
     "channelAdd": 1,
     "verifyAdd": 1,
-    "command-js": 1,
     "disable": 2,
     "enable": 2,
     "banRequestManage": 2,
