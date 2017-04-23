@@ -6,7 +6,7 @@
     "plot": 1,
     "channelAdd": 1,
     "verifyAdd": 1,
-	"command-js": 1,
+    "command-js": 1,
     "disable": 2,
     "enable": 2,
     "banRequestManage": 2,
