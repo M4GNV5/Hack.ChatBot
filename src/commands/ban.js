@@ -28,7 +28,10 @@ var ban = function(bot, sender, args)
 	if(bot.requirePerm(sender, "botBan"))
 		return;
 
-	var time = parseInt(args[0]) * 1000 || 60000;
+	if(args.length < 2)
+		return bot.send("@" + sender + " Usage: !ban <duration sec> <nick ...>");
+
+	var time = parseInt(args[0]) * 1000;
 	var bannUser = args.slice(1).join(" ");
 	var nickBan = bannUser.toLowerCase().trim();
 
@@ -74,6 +77,6 @@ var unban = function(bot, sender, args)
 module.exports =
 {
 	init: init,
-	botBan: ban,
-	botUnban: unban
+	ban: ban,
+	unban: unban
 };
