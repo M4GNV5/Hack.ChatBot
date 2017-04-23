@@ -1,7 +1,6 @@
 ## Level 1
 - `!command set-text|delete|usage|info <cmd> <text ...>` sets/queries custom commands
 - `!ascii <text>` converts text to ascii art and prints result to chat
-- `!autoFilter <word>` adds words that get ignored in auto commands
 - `!plot <...function>` plot the function of a graph in ascii "art"
 - `!channel add|remove <name>` add channel to the `!channel` list
 - `!verify add|remove <trip> <name>` verifies that a certain username usually uses a certain tripcode
