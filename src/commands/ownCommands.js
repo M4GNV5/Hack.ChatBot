@@ -25,6 +25,11 @@ function createCommand(cmd)
 				replace("%" + i + "%", args[i]);
 			}
 
+			if(text.split("\n").length > 5)
+				text = text.substring(0, text.indexOf("\n")).substr(0, 497) + "...";
+			else if(text.length > 500)
+				text = text.substr(0, 497) + "...";
+
 			if(!/%[0-9]+%/g.test(text))
 			{
 				bot.send(text);
@@ -160,6 +165,8 @@ exports.command = function(bot, sender, args, data)
 			bot.send("@" + sender + " Commands shall not have special characters");
 		else if(isCreate && text.trim() == "")
 			bot.send("@" + sender + " command cannot be empty");
+		else if(isCreate && name.length > 16)
+			bot.send("@" + sender + " command names cannot be longer than 16 characters");
 		else if(isCreate && commandsBy(sender).length >= (bot.permLevel[sender] || 0) * config.limitScale + config.limitBase)
 			bot.send("@" + sender + " you already created too many commands");
 		else if(cmd && cmd.author.trip != data.trip && bot.requirePerm(sender, "command-admin", true))
