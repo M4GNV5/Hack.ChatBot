@@ -106,9 +106,6 @@ exports.command = function(bot, sender, args, data)
 	var name = args[1].toLowerCase();
 	var text = args.slice(2).join(" ");
 
-	if(!/^\w+$/.test(name))
-		return bot.send("@" + sender + " Commands should not have special characters");
-
 	var cmd;
 	if(bot.config.ownCommands.hasOwnProperty(name))
 		cmd = bot.config.ownCommands[name];
@@ -159,6 +156,8 @@ exports.command = function(bot, sender, args, data)
 			bot.send("@" + sender + " that is a builtin command");
 		else if(!cmd && !isCreate)
 			bot.send("@" + sender + " no such command exists");
+		else if(!/^\w+$/.test(name))
+			bot.send("@" + sender + " Commands shall not have special characters");
 		else if(isCreate && text.trim() == "")
 			bot.send("@" + sender + " command cannot be empty");
 		else if(isCreate && commandsBy(sender).length >= (bot.permLevel[sender] || 0) * config.limitScale + config.limitBase)
@@ -231,14 +230,33 @@ exports.command = function(bot, sender, args, data)
 
 
 		case "list":
-			var list = commandsBy(args[1]);
-			for(var i = 0; i < list.length; i++)
-				list[i] = "!" + list[i].name;
+			if(args[1] == "*")
+			{
+				var users = {};
+				for(var key in bot.config.ownCommands)
+				{
+					var nick = bot.config.ownCommands[key].author.nick;
+					users[nick] = users[nick] || 0;
+					users[nick]++;
+				}
 
-			if(list.length == 0)
-				list.push("-");
+				var msg = [];
+				for(var key in users)
+					msg.push(key + "(" + users[key] + ")");
 
-			bot.send("@" + sender + " Commands by " + args[1] + ": " + list.join(", "));
+				bot.send("@" + sender + " Users that created commands, syntax is nick(amount):\n" + msg.join(", "));
+			}
+			else
+			{
+				var list = commandsBy(args[1]);
+				for(var i = 0; i < list.length; i++)
+					list[i] = "!" + list[i].name;
+
+				if(list.length == 0)
+					list.push("-");
+
+				bot.send("@" + sender + " Commands by " + args[1] + ": " + list.join(", "));
+			}
 			break;
 
 
