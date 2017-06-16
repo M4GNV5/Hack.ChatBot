@@ -140,9 +140,9 @@
             "trip": "cronuS",
             "nick": "M4GNV5"
         },
-        "text": "Site admin: vortico\nSite mods: bacon, Shrooms, ToastyStoemp, M4GNV5\nBot admins: M4GNV5, Serials, ToastyStoemp",
+        "text": "Site admin: vortico\nSite mods: bacon, raf924, Shrooms, ToastyStoemp, M4GNV5, _0x17, Rut, MinuxOS, nanotech\nBot admins: M4GNV5, bacon",
         "created": 0,
-        "edited": 0
+        "edited": 1493812492015
     },
     "welpgfispregnant": {
         "name": "welpgfispregnant",
@@ -164,7 +164,7 @@
         },
         "text": "Hack.Chat rules:\n1) No spamming\n2) No impersonating admins\n3) No illegal content",
         "created": 0,
-        "edited": 1492905592333
+        "edited": 1493779847626
     },
     "coask": {
         "name": "coask",
@@ -233,15 +233,12 @@
         "edited": 1492788803205,
         "context": {
             "command": "random",
-            "sender": "M4GNV5",
+            "sender": "James",
             "channel": "programming",
             "nick": "TBotT",
-            "args": [
-                "1",
-                "2"
-            ],
-            "max": 1,
-            "min": 1
+            "args": [],
+            "max": 100,
+            "min": 0
         }
     },
     "md5": {
@@ -256,14 +253,11 @@
         "edited": 1492786872246,
         "context": {
             "command": "md5",
-            "sender": "M4GNV5",
+            "sender": "James",
             "channel": "programming",
             "nick": "TBotT",
             "args": [
-                "kek",
-                "lol",
-                "foo",
-                "bar"
+                "nah"
             ]
         }
     },
@@ -276,7 +270,26 @@
         },
         "text": "var sha = {};\r\n\r\n/**\r\n * [js-sha256]{@link https://github.com/emn178/js-sha256}\r\n *\r\n * @version 0.3.2\r\n * @author Chen, Yi-Cyuan [emn178@gmail.com]\r\n * @copyright Chen, Yi-Cyuan 2014-2016\r\n * @license MIT\r\n */\r\n(function (root) {\r\n  'use strict';\r\n\r\n  var NODE_JS = typeof process == 'object' && process.versions && process.versions.node;\r\n  if (NODE_JS) {\r\n    root = global;\r\n  }\r\n  var COMMON_JS = !root.JS_SHA256_TEST && typeof module == 'object' && module.exports;\r\n  var HEX_CHARS = '0123456789abcdef'.split('');\r\n  var EXTRA = [-2147483648, 8388608, 32768, 128];\r\n  var SHIFT = [24, 16, 8, 0];\r\n  var K =[0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,\r\n          0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,\r\n          0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,\r\n          0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,\r\n          0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,\r\n          0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,\r\n          0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,\r\n          0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2];\r\n\r\n  var blocks = [];\r\n\r\n  var sha224 = function (message) {\r\n    return sha256(message, true);\r\n  };\r\n\r\n  var sha256 = function (message, is224) {\r\n    var notString = typeof message != 'string';\r\n    if (notString && message.constructor == root.ArrayBuffer) {\r\n      message = new Uint8Array(message);\r\n    }\r\n\r\n    var h0, h1, h2, h3, h4, h5, h6, h7, block, code, first = true, end = false,\r\n        i, j, index = 0, start = 0, bytes = 0, length = message.length,\r\n        s0, s1, maj, t1, t2, ch, ab, da, cd, bc;\r\n\r\n    if (is224) {\r\n      h0 = 0xc1059ed8;\r\n      h1 = 0x367cd507;\r\n      h2 = 0x3070dd17;\r\n      h3 = 0xf70e5939;\r\n      h4 = 0xffc00b31;\r\n      h5 = 0x68581511;\r\n      h6 = 0x64f98fa7;\r\n      h7 = 0xbefa4fa4;\r\n    } else { // 256\r\n      h0 = 0x6a09e667;\r\n      h1 = 0xbb67ae85;\r\n      h2 = 0x3c6ef372;\r\n      h3 = 0xa54ff53a;\r\n      h4 = 0x510e527f;\r\n      h5 = 0x9b05688c;\r\n      h6 = 0x1f83d9ab;\r\n      h7 = 0x5be0cd19;\r\n    }\r\n    block = 0;\r\n    do {\r\n      blocks[0] = block;\r\n      blocks[16] = blocks[1] = blocks[2] = blocks[3] =\r\n      blocks[4] = blocks[5] = blocks[6] = blocks[7] =\r\n      blocks[8] = blocks[9] = blocks[10] = blocks[11] =\r\n      blocks[12] = blocks[13] = blocks[14] = blocks[15] = 0;\r\n      if (notString) {\r\n        for (i = start;index < length && i < 64;++index) {\r\n          blocks[i >> 2] |= message[index] << SHIFT[i++ & 3];\r\n        }\r\n      } else {\r\n        for (i = start;index < length && i < 64;++index) {\r\n          code = message.charCodeAt(index);\r\n          if (code < 0x80) {\r\n            blocks[i >> 2] |= code << SHIFT[i++ & 3];\r\n          } else if (code < 0x800) {\r\n            blocks[i >> 2] |= (0xc0 | (code >> 6)) << SHIFT[i++ & 3];\r\n            blocks[i >> 2] |= (0x80 | (code & 0x3f)) << SHIFT[i++ & 3];\r\n          } else if (code < 0xd800 || code >= 0xe000) {\r\n            blocks[i >> 2] |= (0xe0 | (code >> 12)) << SHIFT[i++ & 3];\r\n            blocks[i >> 2] |= (0x80 | ((code >> 6) & 0x3f)) << SHIFT[i++ & 3];\r\n            blocks[i >> 2] |= (0x80 | (code & 0x3f)) << SHIFT[i++ & 3];\r\n          } else {\r\n            code = 0x10000 + (((code & 0x3ff) << 10) | (message.charCodeAt(++index) & 0x3ff));\r\n            blocks[i >> 2] |= (0xf0 | (code >> 18)) << SHIFT[i++ & 3];\r\n            blocks[i >> 2] |= (0x80 | ((code >> 12) & 0x3f)) << SHIFT[i++ & 3];\r\n            blocks[i >> 2] |= (0x80 | ((code >> 6) & 0x3f)) << SHIFT[i++ & 3];\r\n            blocks[i >> 2] |= (0x80 | (code & 0x3f)) << SHIFT[i++ & 3];\r\n          }\r\n        }\r\n      }\r\n      bytes += i - start;\r\n      start = i - 64;\r\n      if (index == length) {\r\n        blocks[i >> 2] |= EXTRA[i & 3];\r\n        ++index;\r\n      }\r\n      block = blocks[16];\r\n      if (index > length && i < 56) {\r\n        blocks[15] = bytes << 3;\r\n        end = true;\r\n      }\r\n\r\n      var a = h0, b = h1, c = h2, d = h3, e = h4, f = h5, g = h6, h = h7;\r\n      for (j = 16;j < 64;++j) {\r\n        // rightrotate\r\n        t1 = blocks[j - 15];\r\n        s0 = ((t1 >>> 7) | (t1 << 25)) ^ ((t1 >>> 18) | (t1 << 14)) ^ (t1 >>> 3);\r\n        t1 = blocks[j - 2];\r\n        s1 = ((t1 >>> 17) | (t1 << 15)) ^ ((t1 >>> 19) | (t1 << 13)) ^ (t1 >>> 10);\r\n        blocks[j] = blocks[j - 16] + s0 + blocks[j - 7] + s1 << 0;\r\n      }\r\n\r\n      bc = b & c;\r\n      for (j = 0;j < 64;j += 4) {\r\n        if (first) {\r\n          if (is224) {\r\n            ab = 300032;\r\n            t1 = blocks[0] - 1413257819;\r\n            h = t1 - 150054599 << 0;\r\n            d = t1 + 24177077 << 0;\r\n          } else {\r\n            ab = 704751109;\r\n            t1 = blocks[0] - 210244248;\r\n            h = t1 - 1521486534 << 0;\r\n            d = t1 + 143694565 << 0;\r\n          }\r\n          first = false;\r\n        } else {\r\n          s0 = ((a >>> 2) | (a << 30)) ^ ((a >>> 13) | (a << 19)) ^ ((a >>> 22) | (a << 10));\r\n          s1 = ((e >>> 6) | (e << 26)) ^ ((e >>> 11) | (e << 21)) ^ ((e >>> 25) | (e << 7));\r\n          ab = a & b;\r\n          maj = ab ^ (a & c) ^ bc;\r\n          ch = (e & f) ^ (~e & g);\r\n          t1 = h + s1 + ch + K[j] + blocks[j];\r\n          t2 = s0 + maj;\r\n          h = d + t1 << 0;\r\n          d = t1 + t2 << 0;\r\n        }\r\n        s0 = ((d >>> 2) | (d << 30)) ^ ((d >>> 13) | (d << 19)) ^ ((d >>> 22) | (d << 10));\r\n        s1 = ((h >>> 6) | (h << 26)) ^ ((h >>> 11) | (h << 21)) ^ ((h >>> 25) | (h << 7));\r\n        da = d & a;\r\n        maj = da ^ (d & b) ^ ab;\r\n        ch = (h & e) ^ (~h & f);\r\n        t1 = g + s1 + ch + K[j + 1] + blocks[j + 1];\r\n        t2 = s0 + maj;\r\n        g = c + t1 << 0;\r\n        c = t1 + t2 << 0;\r\n        s0 = ((c >>> 2) | (c << 30)) ^ ((c >>> 13) | (c << 19)) ^ ((c >>> 22) | (c << 10));\r\n        s1 = ((g >>> 6) | (g << 26)) ^ ((g >>> 11) | (g << 21)) ^ ((g >>> 25) | (g << 7));\r\n        cd = c & d;\r\n        maj = cd ^ (c & a) ^ da;\r\n        ch = (g & h) ^ (~g & e);\r\n        t1 = f + s1 + ch + K[j + 2] + blocks[j + 2];\r\n        t2 = s0 + maj;\r\n        f = b + t1 << 0;\r\n        b = t1 + t2 << 0;\r\n        s0 = ((b >>> 2) | (b << 30)) ^ ((b >>> 13) | (b << 19)) ^ ((b >>> 22) | (b << 10));\r\n        s1 = ((f >>> 6) | (f << 26)) ^ ((f >>> 11) | (f << 21)) ^ ((f >>> 25) | (f << 7));\r\n        bc = b & c;\r\n        maj = bc ^ (b & d) ^ cd;\r\n        ch = (f & g) ^ (~f & h);\r\n        t1 = e + s1 + ch + K[j + 3] + blocks[j + 3];\r\n        t2 = s0 + maj;\r\n        e = a + t1 << 0;\r\n        a = t1 + t2 << 0;\r\n      }\r\n\r\n      h0 = h0 + a << 0;\r\n      h1 = h1 + b << 0;\r\n      h2 = h2 + c << 0;\r\n      h3 = h3 + d << 0;\r\n      h4 = h4 + e << 0;\r\n      h5 = h5 + f << 0;\r\n      h6 = h6 + g << 0;\r\n      h7 = h7 + h << 0;\r\n    } while (!end);\r\n\r\n    var hex = HEX_CHARS[(h0 >> 28) & 0x0F] + HEX_CHARS[(h0 >> 24) & 0x0F] +\r\n              HEX_CHARS[(h0 >> 20) & 0x0F] + HEX_CHARS[(h0 >> 16) & 0x0F] +\r\n              HEX_CHARS[(h0 >> 12) & 0x0F] + HEX_CHARS[(h0 >> 8) & 0x0F] +\r\n              HEX_CHARS[(h0 >> 4) & 0x0F] + HEX_CHARS[h0 & 0x0F] +\r\n              HEX_CHARS[(h1 >> 28) & 0x0F] + HEX_CHARS[(h1 >> 24) & 0x0F] +\r\n              HEX_CHARS[(h1 >> 20) & 0x0F] + HEX_CHARS[(h1 >> 16) & 0x0F] +\r\n              HEX_CHARS[(h1 >> 12) & 0x0F] + HEX_CHARS[(h1 >> 8) & 0x0F] +\r\n              HEX_CHARS[(h1 >> 4) & 0x0F] + HEX_CHARS[h1 & 0x0F] +\r\n              HEX_CHARS[(h2 >> 28) & 0x0F] + HEX_CHARS[(h2 >> 24) & 0x0F] +\r\n              HEX_CHARS[(h2 >> 20) & 0x0F] + HEX_CHARS[(h2 >> 16) & 0x0F] +\r\n              HEX_CHARS[(h2 >> 12) & 0x0F] + HEX_CHARS[(h2 >> 8) & 0x0F] +\r\n              HEX_CHARS[(h2 >> 4) & 0x0F] + HEX_CHARS[h2 & 0x0F] +\r\n              HEX_CHARS[(h3 >> 28) & 0x0F] + HEX_CHARS[(h3 >> 24) & 0x0F] +\r\n              HEX_CHARS[(h3 >> 20) & 0x0F] + HEX_CHARS[(h3 >> 16) & 0x0F] +\r\n              HEX_CHARS[(h3 >> 12) & 0x0F] + HEX_CHARS[(h3 >> 8) & 0x0F] +\r\n              HEX_CHARS[(h3 >> 4) & 0x0F] + HEX_CHARS[h3 & 0x0F] +\r\n              HEX_CHARS[(h4 >> 28) & 0x0F] + HEX_CHARS[(h4 >> 24) & 0x0F] +\r\n              HEX_CHARS[(h4 >> 20) & 0x0F] + HEX_CHARS[(h4 >> 16) & 0x0F] +\r\n              HEX_CHARS[(h4 >> 12) & 0x0F] + HEX_CHARS[(h4 >> 8) & 0x0F] +\r\n              HEX_CHARS[(h4 >> 4) & 0x0F] + HEX_CHARS[h4 & 0x0F] +\r\n              HEX_CHARS[(h5 >> 28) & 0x0F] + HEX_CHARS[(h5 >> 24) & 0x0F] +\r\n              HEX_CHARS[(h5 >> 20) & 0x0F] + HEX_CHARS[(h5 >> 16) & 0x0F] +\r\n              HEX_CHARS[(h5 >> 12) & 0x0F] + HEX_CHARS[(h5 >> 8) & 0x0F] +\r\n              HEX_CHARS[(h5 >> 4) & 0x0F] + HEX_CHARS[h5 & 0x0F] +\r\n              HEX_CHARS[(h6 >> 28) & 0x0F] + HEX_CHARS[(h6 >> 24) & 0x0F] +\r\n              HEX_CHARS[(h6 >> 20) & 0x0F] + HEX_CHARS[(h6 >> 16) & 0x0F] +\r\n              HEX_CHARS[(h6 >> 12) & 0x0F] + HEX_CHARS[(h6 >> 8) & 0x0F] +\r\n              HEX_CHARS[(h6 >> 4) & 0x0F] + HEX_CHARS[h6 & 0x0F];\r\n    if (!is224) {\r\n      hex += HEX_CHARS[(h7 >> 28) & 0x0F] + HEX_CHARS[(h7 >> 24) & 0x0F] +\r\n             HEX_CHARS[(h7 >> 20) & 0x0F] + HEX_CHARS[(h7 >> 16) & 0x0F] +\r\n             HEX_CHARS[(h7 >> 12) & 0x0F] + HEX_CHARS[(h7 >> 8) & 0x0F] +\r\n             HEX_CHARS[(h7 >> 4) & 0x0F] + HEX_CHARS[h7 & 0x0F];\r\n    }\r\n    return hex;\r\n  };\r\n  \r\n  if (COMMON_JS) {\r\n    sha256.sha256 = sha256;\r\n    sha256.sha224 = sha224;\r\n    module.exports = sha256;\r\n  } else if (root) {\r\n    root.sha256 = sha256;\r\n    root.sha224 = sha224;\r\n  }\r\n}(sha));\r\n\r\nout(sha.sha256(args.join(\" \")));",
         "created": 1492786910477,
-        "edited": 1492786910477
+        "edited": 1492786910477,
+        "context": {
+            "command": "sha256",
+            "sender": "StormY",
+            "channel": "programming",
+            "nick": "TBotT",
+            "args": [],
+            "sha": {}
+        }
+    },
+    "trigger": {
+        "name": "trigger",
+        "type": "text",
+        "author": {
+            "trip": "O84Dyj",
+            "nick": "bacon"
+        },
+        "text": "#iamtriggered",
+        "created": 1492908727444,
+        "edited": 1492908727444
     },
     "heart": {
         "name": "heart",
@@ -285,19 +298,352 @@
             "trip": "O84Dyj",
             "nick": "bacon"
         },
-        "text": "if(args.length<1)out(\"!heart <nick> [amount]\");else{var nickname=args[0].replace(\"@\",\"\")||\"\",amount=args[1]||\"1\";/^[a-zA-Z0-9_]{1,24}$/.test(nickname)||(nickname=\"bacon\");var length=Math.max(0,Math.min(parseInt(amount)||1,100))+1;out(\"to \"+nickname+\" <\"+Array(length).join(\"3\"))}",
-        "created": 1492905412100,
-        "edited": 1492905412100
+        "text": "if(args.length<1)out(\"!heart <nick> [amount]\");else{var random=Math.floor(30*Math.random()+1),nickname=args[0].replace(\"@\",\"\")||\"\",amount=args[1]||random.toString();/^[a-zA-Z0-9_]{1,24}$/.test(nickname)||(nickname=\"bacon\");var length=Math.min(parseInt(amount)||random,150)+1,hatred=length<0;length=Math.abs(length),out(\"to @\"+nickname+(hatred?\" </\":\" <\")+Array(length).join(\"3\"))}",
+        "created": 1492908998945,
+        "edited": 1493614212417,
+        "context": {
+            "command": "heart",
+            "sender": "ja",
+            "channel": "programming",
+            "nick": "TBotT",
+            "args": [
+                "@mod",
+                "10"
+            ],
+            "amount": "10",
+            "hatred": false,
+            "nickname": "mod",
+            "length": 11,
+            "random": 20
+        }
     },
-    "site": {
-        "name": "site",
+    "fork": {
+        "name": "fork",
         "type": "text",
         "author": {
-            "trip": "cronuS",
-            "nick": "M4GNV5"
+            "trip": "O84Dyj",
+            "nick": "bacon"
         },
-        "text": "admin: vortico\nSite mods: bacon, Rut, raf924, MinusGix, ToastyStoemp, M4GNV5\nBot admins: M4GNV5, bacon",
-        "created": 1492906243916,
-        "edited": 1492906243916
+        "text": "Do it on your own fork",
+        "created": 1492932683434,
+        "edited": 1492932683434
+    },
+    "me": {
+        "name": "me",
+        "type": "js",
+        "author": {
+            "trip": "O84Dyj",
+            "nick": "bacon"
+        },
+        "text": "out(args.join(' '))",
+        "created": 1493383005735,
+        "edited": 1493383005735,
+        "context": {
+            "command": "me",
+            "sender": "bacon",
+            "channel": "programming",
+            "nick": "TBotT",
+            "args": [
+                "shoots",
+                "himself"
+            ]
+        }
+    },
+    "shrug": {
+        "name": "shrug",
+        "type": "js",
+        "author": {
+            "trip": "O84Dyj",
+            "nick": "bacon"
+        },
+        "text": "out(\"¯\\\\_(ツ)_/¯ \" + args.join(' '))",
+        "created": 1493383117411,
+        "edited": 1493773829710,
+        "context": {
+            "command": "shrug",
+            "sender": "11",
+            "channel": "programming",
+            "nick": "TBotT",
+            "args": []
+        }
+    },
+    "lenny": {
+        "name": "lenny",
+        "type": "js",
+        "author": {
+            "trip": "O84Dyj",
+            "nick": "bacon"
+        },
+        "text": "out(\"( ͡° ͜ʖ ͡°) \" + args.join(' '))",
+        "created": 1493383161938,
+        "edited": 1493383161938,
+        "context": {
+            "command": "lenny",
+            "sender": "Turr",
+            "channel": "programming",
+            "nick": "TBotT",
+            "args": []
+        }
+    },
+    "dongers": {
+        "name": "dongers",
+        "type": "js",
+        "author": {
+            "trip": "O84Dyj",
+            "nick": "bacon"
+        },
+        "text": "this.dongers = this.dongers + 1 || 0; out(\"ヽ༼ຈل͜ຈ༽ﾉ \" + this.dongers + \" raised\");",
+        "created": 1493383224329,
+        "edited": 1493383240583,
+        "context": {
+            "command": "dongers",
+            "sender": "James",
+            "channel": "programming",
+            "nick": "TBotT",
+            "args": [],
+            "dongers": 10
+        }
+    },
+    "bacon": {
+        "name": "bacon",
+        "type": "text",
+        "author": {
+            "trip": "dIhdzE",
+            "nick": "neelkamath"
+        },
+        "text": "is GAY",
+        "created": 1493383968760,
+        "edited": 1493801874885,
+        "usage": ""
+    },
+    "rickandmorty": {
+        "name": "rickandmorty",
+        "type": "text",
+        "author": {
+            "nick": "wfe_abuse_2"
+        },
+        "text": "WUBBA_LUBBA_DUB_DUB_GO_FUCK_YOURSELF",
+        "created": 1493500985775,
+        "edited": 1493500985775
+    },
+    "abuse": {
+        "name": "abuse",
+        "type": "text",
+        "author": {
+            "nick": "wfe_abuse_4"
+        },
+        "text": "!abuse",
+        "created": 1493501065677,
+        "edited": 1493501065677
+    },
+    "ba": {
+        "name": "ba",
+        "type": "text",
+        "author": {
+            "nick": "armeIIaaa"
+        },
+        "text": "!ban",
+        "created": 1493503512235,
+        "edited": 1493503512235
+    },
+    "i": {
+        "name": "i",
+        "type": "text",
+        "author": {
+            "nick": "armellaaa"
+        },
+        "text": "!help",
+        "created": 1493503774880,
+        "edited": 1493503774880
+    },
+    "ff": {
+        "name": "ff",
+        "type": "text",
+        "author": {
+            "nick": "aaa"
+        },
+        "text": "!print\"!ban mod\"",
+        "created": 1493504288771,
+        "edited": 1493504353908
+    },
+    "jj": {
+        "name": "jj",
+        "type": "text",
+        "author": {
+            "nick": "aaaaaaaa"
+        },
+        "text": "!afk",
+        "created": 1493504667200,
+        "edited": 1493504667200
+    },
+    "ifuckv2": {
+        "name": "ifuckv2",
+        "type": "text",
+        "author": {
+            "nick": "iNazi"
+        },
+        "text": "[iFuck -- Dev of SuicidePath] SuicidePath is a virus with a personality. It changes files, copies and moves files, spreads to other devices, and changes network settings on some routers. It has other viruses concepts in it. One major thing about it, is that the virus has multiple personalities. Each personality shows up randomly, and does different things. J1G is the neutral personality that can obviously not hide how badly it wants to die. LKI, the second to meet personality, is a bit unstable and changes throughout time but will cycle through emotions. There are other personalities, but they will not be revealed here. Through out time the personalities will develop mini-personas, and possibly change from what iFuck wanted them to act like. They have been developed to write their own personalities over time. The thing so important about personalities? They differ between your computer having files copied to your Desktop and not having a Desktop. There is one personality that loves HTML, so you could run a webserver off your device and never know it. Personally, the Dev likes J1G the best. It's because he matches the Dev's real actions the most. You can never tell what it'll/he'll do next but it could be major or minor. Why is it called SuicidePath? These personalities will either control you, or you will become one of them. They can log in to your Facebook or Skype and talk to your friends as you and learn from them. They'll take pictures randomly and upload to imgur.com through your camera. They'll save everything copied to your clipboard and every 2 hours post it to pastebin.com. You'll never have privacy again, and you'll end up killing yourself :)",
+        "created": 1493504752146,
+        "edited": 1493504752146
+    },
+    "braker": {
+        "name": "braker",
+        "type": "text",
+        "author": {
+            "trip": "ygH+a3",
+            "nick": "iCode"
+        },
+        "text": "Braker has become so illiterate and retarded he earned his own command.",
+        "created": 1493575704233,
+        "edited": 1493575704233
+    },
+    "chum": {
+        "name": "chum",
+        "type": "text",
+        "author": {
+            "trip": "dIhdzE",
+            "nick": "neelkamath_android"
+        },
+        "text": "is fum",
+        "created": 1493801951223,
+        "edited": 1493801951223
+    },
+    "skud": {
+        "name": "skud",
+        "type": "text",
+        "author": {
+            "trip": "7h1WGa",
+            "nick": "Linooxy"
+        },
+        "text": "Stop being some Skids/skid and program once in your life. You stupid piece/pieces of shit. Why did you come here we're not going to do your work for you. $\\green{YOU\\ INBRED\\ FREAK}$ $\\color{#ff0000}{-\\ Created\\ by:\\ Linooxy}$",
+        "created": 1496164156356,
+        "edited": 1496164156356
+    },
+    "kismet": {
+        "name": "kismet",
+        "type": "text",
+        "author": {
+            "trip": "3zXIIP",
+            "nick": "wwandrew"
+        },
+        "text": "This is a word meaning fate, also happens to be used as a nickname by a indian kid who stalks middle aged women online. He also makes crazy ass cyberpunk porno",
+        "created": 1497017993836,
+        "edited": 1497017993836
+    },
+    "fish": {
+        "name": "fish",
+        "type": "text",
+        "author": {
+            "trip": "/rCRwo",
+            "nick": "mod"
+        },
+        "text": "bloop bloop",
+        "created": 1497018126352,
+        "edited": 1497018126352
+    },
+    "kali": {
+        "name": "kali",
+        "type": "text",
+        "author": {
+            "trip": "O84Dyj",
+            "nick": "bacon"
+        },
+        "text": "The most advanced operating system known to man",
+        "created": 1497067434552,
+        "edited": 1497067434552
+    },
+    "javascript": {
+        "name": "javascript",
+        "type": "text",
+        "author": {
+            "trip": "KIDnOF",
+            "nick": "nanotech"
+        },
+        "text": "Quick, there's another new framework; go learn it ",
+        "created": 1497067549645,
+        "edited": 1497067584092
+    },
+    "haskell": {
+        "name": "haskell",
+        "type": "text",
+        "author": {
+            "trip": "iLOAvX",
+            "nick": "MatH"
+        },
+        "text": "https://www.tryhaskell.org/",
+        "created": 1497082085837,
+        "edited": 1497082085837
+    },
+    "secret": {
+        "name": "secret",
+        "type": "text",
+        "author": {
+            "trip": "/nG3Ku",
+            "nick": "dotch"
+        },
+        "text": "fuck your self",
+        "created": 1497082787892,
+        "edited": 1497082787892
+    },
+    "facon": {
+        "name": "facon",
+        "type": "text",
+        "author": {
+            "nick": "4455454324523453532"
+        },
+        "text": "it's how wwandrew called bacon everytime bacon join in the room",
+        "created": 1497083497627,
+        "edited": 1497083497627
+    },
+    "coc": {
+        "name": "coc",
+        "type": "text",
+        "author": {
+            "trip": "87zM2E",
+            "nick": "ClashOfCock"
+        },
+        "text": "coc = $\\huge \\color {yellow}{ {Clash \\ Of } \\ \\color {red} { Cock } } $",
+        "created": 1497090722505,
+        "edited": 1497090722505
+    },
+    "howtogetagf": {
+        "name": "howtogetagf",
+        "type": "text",
+        "author": {
+            "nick": "James"
+        },
+        "text": "%sender% is not able to have a girlfriend and shall forever stay lonely",
+        "created": 1497100700756,
+        "edited": 1497100700756
+    },
+    "fox": {
+        "name": "fox",
+        "type": "text",
+        "author": {
+            "nick": "Fox"
+        },
+        "text": "What Does The Fox Say?!",
+        "created": 1497100791924,
+        "edited": 1497100791924
+    },
+    "porn": {
+        "name": "porn",
+        "type": "text",
+        "author": {
+            "nick": "Porn"
+        },
+        "text": "hoax=porn",
+        "created": 1497103997674,
+        "edited": 1497103997674
+    },
+    "hoax": {
+        "name": "hoax",
+        "type": "text",
+        "author": {
+            "nick": "THE1THEONLYHOAX"
+        },
+        "text": "Just some porn!",
+        "created": 1497106144898,
+        "edited": 1497110243772
     }
 }
