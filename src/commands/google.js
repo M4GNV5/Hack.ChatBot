@@ -16,7 +16,6 @@ var googleCallback = function(bot, sender, args)
 		if (err)
 			return bot.send(err.toString());
 
-		require("fs").writeFileSync("dump.json", JSON.stringify(resp, undefined, 4));
 		if (resp.items && resp.items.length > 0)
 		{
 			var result = [];
