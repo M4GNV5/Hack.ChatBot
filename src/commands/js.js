@@ -36,13 +36,12 @@ exports.js = function(bot, sender, args)
 		var id = args[1];
 		request("http://pastebin.com/raw.php?i=" + id, function(err, res, code)
 		{
-			if(err)
+			if(err || !code || res.code != 200)
 			{
-				bot.send("@" + sender + " " + err.toString());
+				bot.send("@" + sender + " " + (err || "Invalid pastebin").toString());
 				return;
 			}
 
-			lib.runCode(code, ctx);
 			runWithContext(code, args.slice(2));
 		});
 	}

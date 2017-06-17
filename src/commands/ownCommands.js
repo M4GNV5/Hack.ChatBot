@@ -202,9 +202,9 @@ exports.command = function(bot, sender, args, data)
 
 			request("http://pastebin.com/raw.php?i=" + text, function(err, res, code)
 			{
-				if(err)
+				if(err || !code || res.code != 200)
 				{
-					bot.send("@" + sender + " " + err.toString());
+					bot.send("@" + sender + " " + (err || "Invalid pastebin").toString());
 				}
 				else
 				{
