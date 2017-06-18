@@ -1,3 +1,5 @@
+var config = require("../config.json")
+
 var help = function(bot, sender, args)
 {
 	var cmds = [];
@@ -11,7 +13,9 @@ var help = function(bot, sender, args)
 			cmds.push(key);
 	}
 	cmds = cmds.sort();
-	bot.send("$\\Large\\text{hack.chat bot by M4GNV5}$\nCommands: !" + cmds.join(", !"));
+    trigger = config["cmdPrefix"]
+	bot.send("$\\Large\\text{hack.chat bot by M4GNV5}$\nCommands: "
+             + trigger + cmds.join(", " + trigger));
 }
 
 module.exports = { h: help, help: help };
