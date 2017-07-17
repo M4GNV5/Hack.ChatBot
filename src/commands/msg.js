@@ -22,22 +22,28 @@ exports.init = function(bot)
 {
 	bot.on("chat", function(data)
 	{
+		var key = data.nick + "#" + data.trip;
+
 		if(messages.hasOwnProperty(data.nick))
+			key = data.nick;
+		else if(messages.hasOwnProperty(key))
+			key = key; //doh
+		else
+			return;
+
+		var entries = messages[key];
+		delete messages[key];
+
+		var text = "@" + key + " you have " + entries.length + " new " +
+			(entries.length == 1 ? "message" : "messages") + "\n";
+
+		var now = new Date();
+		entries.forEach(function(msg)
 		{
-			var entries = messages[data.nick];
-			delete messages[data.nick];
+			text += "[" + formatTimeDiff(msg.time) + "] " + msg.sender + " : " + msg.message + "\n";
+		});
 
-			var text = "@" + data.nick + " you have " + entries.length + " new " +
-				(entries.length == 1 ? "message" : "messages") + "\n";
-
-			var now = new Date();
-			entries.forEach(function(msg)
-			{
-				text += "[" + formatTimeDiff(msg.time) + "] " + msg.sender + " : " + msg.message + "\n";
-			});
-
-			bot.send(text);
-		}
+		bot.send(text);
 	});
 }
 
@@ -50,10 +56,15 @@ exports.msg = function(bot, sender, args)
 	if(target[0] == "@")
 		target = target.substr(1);
 
+	if(bot.config.tripCodes.hasOwnProperty(target))
+		target = target + "#" + bot.config.tripCodes[target];
+
 	messages[target] = messages[target] || [];
 	messages[target].push({
 		time: Date.now(),
 		sender: sender,
 		message: args.slice(1).join(" ")
 	});
+
+	bot.send("@" + sender + " " + target + " will receive your message once he's back");
 };
