@@ -164,7 +164,7 @@
         },
         "text": "Hack.Chat rules:\n1) No spamming\n2) No impersonating admins\n3) No illegal content",
         "created": 0,
-        "edited": 1493779847626
+        "edited": 1502362806739
     },
     "coask": {
         "name": "coask",
@@ -233,7 +233,7 @@
         "edited": 1492788803205,
         "context": {
             "command": "random",
-            "sender": "James",
+            "sender": "Life2Live4",
             "channel": "programming",
             "nick": "TBotT",
             "args": [],
@@ -253,11 +253,11 @@
         "edited": 1492786872246,
         "context": {
             "command": "md5",
-            "sender": "James",
+            "sender": "zatch",
             "channel": "programming",
             "nick": "TBotT",
             "args": [
-                "nah"
+                "monkey"
             ]
         }
     },
@@ -273,7 +273,7 @@
         "edited": 1492786910477,
         "context": {
             "command": "sha256",
-            "sender": "StormY",
+            "sender": "chamomile",
             "channel": "programming",
             "nick": "TBotT",
             "args": [],
@@ -303,18 +303,15 @@
         "edited": 1493614212417,
         "context": {
             "command": "heart",
-            "sender": "ja",
+            "sender": "Life2Live4",
             "channel": "programming",
             "nick": "TBotT",
-            "args": [
-                "@mod",
-                "10"
-            ],
-            "amount": "10",
+            "args": [],
+            "amount": "__proto__",
             "hatred": false,
-            "nickname": "mod",
-            "length": 11,
-            "random": 20
+            "nickname": "me",
+            "length": 20,
+            "random": 19
         }
     },
     "fork": {
@@ -340,13 +337,10 @@
         "edited": 1493383005735,
         "context": {
             "command": "me",
-            "sender": "bacon",
+            "sender": "longD",
             "channel": "programming",
             "nick": "TBotT",
-            "args": [
-                "shoots",
-                "himself"
-            ]
+            "args": []
         }
     },
     "shrug": {
@@ -361,7 +355,7 @@
         "edited": 1493773829710,
         "context": {
             "command": "shrug",
-            "sender": "11",
+            "sender": "qwerty",
             "channel": "programming",
             "nick": "TBotT",
             "args": []
@@ -379,7 +373,7 @@
         "edited": 1493383161938,
         "context": {
             "command": "lenny",
-            "sender": "Turr",
+            "sender": "chamomile",
             "channel": "programming",
             "nick": "TBotT",
             "args": []
@@ -397,11 +391,11 @@
         "edited": 1493383240583,
         "context": {
             "command": "dongers",
-            "sender": "James",
+            "sender": "__proto__",
             "channel": "programming",
             "nick": "TBotT",
             "args": [],
-            "dongers": 10
+            "dongers": 11
         }
     },
     "bacon": {
@@ -645,5 +639,27 @@
         "text": "Just some porn!",
         "created": 1497106144898,
         "edited": 1497110243772
+    },
+    "suicide": {
+        "name": "suicide",
+        "type": "text",
+        "author": {
+            "trip": "3zXIIP",
+            "nick": "wwandrew"
+        },
+        "text": "%sender% killed themselves",
+        "created": 1501518699253,
+        "edited": 1501518841041
+    },
+    "retard": {
+        "name": "retard",
+        "type": "text",
+        "author": {
+            "trip": "3zXIIP",
+            "nick": "wwandrew"
+        },
+        "text": "https://twitter.com/XIN7AX",
+        "created": 1502375081535,
+        "edited": 1502375081535
     }
 }
