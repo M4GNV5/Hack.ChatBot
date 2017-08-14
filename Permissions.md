@@ -1,3 +1,8 @@
+Please note that the required permission level can be changed for each command individually
+in `src/data/requiredPerm.json` the list below shows the default settings. Normal users
+have a permission level of 0, verified ones a level of 1. You can set the permission of specific
+trip codes in `src/data/users.json`.
+
 ## Level 1
 - `!command set-text|delete|usage|info <cmd> <text ...>` sets/queries custom commands
 - `!ascii <text>` converts text to ascii art and prints result to chat
