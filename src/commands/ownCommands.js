@@ -273,7 +273,12 @@ exports.command = function(bot, sender, args, data)
 
 			var msg = "Info for command !" + name +
 				"\nAuthor: [" + cmd.author.trip + "] " + cmd.author.nick +
-				"\nType: " + cmd.type;
+				"\nCreated: " + (new Date(cmd.created)).toLocaleString();
+
+			if(cmd.created != cmd.edited)
+				msg += "\nEdited: " + (new Date(cmd.edited)).toLocaleString();
+
+			msg += "\nType: " + cmd.type;
 
 			if(cmd.usage)
 				msg += "\nUsage: " + cmd.usage;
