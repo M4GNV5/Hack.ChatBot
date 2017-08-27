@@ -1,24 +1,55 @@
-var math = require("mathjs");
-
-var mathCommand = function(bot, sender, args)
+if(require.main === module)
 {
-	try
-	{
-		var arg = args.join(" ");
-		var result = math.eval(arg);
+	var math = require("mathjs");
 
-		if(typeof result == 'function')
+	process.on("message", function(message)
+	{
+		try
 		{
-			bot.send("Cannot output function. Try " + arg + "; " + result.name + "(...)");
-			return;
+			var result = math.eval(message.expression);
+
+			if(typeof result == 'function')
+			{
+				process.send({
+					error: true,
+					result: "Cannot output function. Try " + message.expression + "; " + result.name + "(...)"
+				});
+			}
+			else
+			{
+				process.send({
+					error: false,
+					result: result.toString()
+				});
+			}
 		}
+		catch(e)
+		{
+			process.send({
+				error: true,
+				result: e.toString()
+			});
+		}
+	});
+}
+else
+{
+	var childP = require("child_process");
 
-		bot.send("Result: " + result.toString());
-	}
-	catch(e)
+	exports.math = function(bot, sender, args)
 	{
-		bot.send(e.toString());
-	}
-};
+		var p = childP.fork(__filename);
+		var timer = setTimeout(function()
+		{
+			p.kill();
+			bot.send("@" + sender + " terminated! Execution took too long");
+		}, 3000);
 
-module.exports = {math: mathCommand};
+		p.on("message", function(message)
+		{
+			clearTimeout(timer);
+			bot.send("@" + sender + " " + message.result);
+		});
+		p.send({expression: args.join(" ")});
+	};
+}
