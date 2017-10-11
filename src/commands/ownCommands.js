@@ -268,8 +268,8 @@ exports.command = function(bot, sender, args, data)
 
 
 		case "info":
-			if(!checkUserPerm())
-				return;
+			if(!cmd)
+				return bot.send("@" + sender + " that command doesn't exist or is builtin");
 
 			var msg = "Info for command !" + name +
 				"\nAuthor: [" + cmd.author.trip + "] " + cmd.author.nick +
